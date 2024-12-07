@@ -1,12 +1,56 @@
 
 from django.shortcuts import render, redirect
 # from .forms import EleveForm, EnseignantForm
-from .models import Eleve, Enseignant, Matiere, Departement
+from .models import Eleve, Enseignant, Matiere, Departement, Utilisateur
 
 # Create your views here.
 
 from django.shortcuts import get_object_or_404
 from django.contrib import messages
+
+
+
+from django.contrib.auth import login
+
+
+def inscription_eleve(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        email = request.POST['email']
+        password = request.POST['password']
+        password_confirm = request.POST['password_confirm']
+        matricule = request.POST['matricule']
+
+        # Vérification des mots de passe
+        if password != password_confirm:
+            return render(request, 'preschool/html-template/inscription_eleve.html', {
+                'erreur': "Les mots de passe ne correspondent pas."
+            })
+
+        # Vérification du matricule
+        try:
+            eleve = Eleve.objects.get(matricule=matricule)
+        except Eleve.DoesNotExist:
+            return render(request, 'preschool/html-template/inscription_eleve.html', {
+                'erreur': "Le matricule est invalide ou n'existe pas."
+            })
+
+        # Création de l'utilisateur élève
+        utilisateur = Utilisateur.objects.create_user(
+            username=username,
+            email=email,
+            password=password,
+            role='eleve',
+            identifiant_unique=matricule
+        )
+        utilisateur.save()
+
+        # Connecter l'utilisateur après inscription
+        login(request, utilisateur)
+        return redirect('liste_eleves')  # Rediriger vers le tableau de bord de l'élève
+
+    return render(request, 'preschool/html-template/inscription_eleve.html')
+
 
 
 

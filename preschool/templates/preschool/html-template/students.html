@@ -30,7 +30,7 @@
                      <table class="table table-hover table-center mb-0 datatable">
                         <thead>
                            <tr>
-                              <th class="text-center">ID</th>
+                              <th class="text-center">Matricule</th>
                               <th class="text-center">profil</th>
                               <th class="text-center">Nom</th>
                               <th class="text-center">Date de naissance</th>
@@ -44,7 +44,7 @@
                            <!-- element de la base de données -->
                            {% for eleve in eleves %}
                          <tr>
-                             <td>{{ eleve.id }}</td>
+                             <td>{{ eleve.matricule }}</td>
                              <td>
                               <h2 class="table-avatar">
                                 <a href="teacher-details.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{{eleve.photo.url}}" alt="eleve.prenom"></a>

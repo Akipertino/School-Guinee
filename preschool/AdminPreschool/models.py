@@ -2,6 +2,59 @@ from django.db import models
 
 # Create your models here.
 
+from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import User
+
+class Utilisateur(AbstractUser):
+    ROLE_CHOICES = [
+        ('admin', 'Administrateur'),
+        ('enseignant', 'Enseignant'),
+        ('eleve', 'Élève'),
+        ('comptable', 'Comptable'),
+    ]
+    
+    role = models.CharField(max_length=20, choices=ROLE_CHOICES)
+    identifiant_unique = models.CharField(max_length=50, unique=True, blank=True, null=True)
+
+    
+    
+    # Vérification de l'identifiant pour les élèves uniquement
+    def save(self, *args, **kwargs):
+        if self.role == 'eleve' and not self.identifiant_unique:
+            raise ValueError("Un élève doit avoir un identifiant unique.")
+        super().save(*args, **kwargs)
+
+
+
+class InscriptionEleve(models.Model):
+    matricule = models.CharField(max_length=100, unique=True, verbose_name="Matricule")
+    prenom = models.CharField(max_length=100, verbose_name="Prénom")
+    nom = models.CharField(max_length=100, verbose_name="Nom")
+    
+    def __str__(self):
+        return f"{self.prenom} {self.nom} ({self.matricule})"
+
+    class Meta:
+        verbose_name = "Élève"
+        verbose_name_plural = "Élèves"
+
+
+
+# class InscriptionEleve(models.Model):
+#     utilisateur = models.OneToOneField(User, on_delete=models.CASCADE, related_name="inscription", verbose_name="Utilisateur associé")
+#     eleve = models.OneToOneField(Eleve, on_delete=models.CASCADE, related_name="inscription", verbose_name="Élève")
+#     date_inscription = models.DateTimeField(auto_now_add=True, verbose_name="Date d'inscription")
+#     est_actif = models.BooleanField(default=True, verbose_name="Inscription active")
+
+#     def __str__(self):
+#         return f"{self.utilisateur.username} - {self.eleve.matricule}"
+
+#     class Meta:
+#         verbose_name = "Inscription d'élève"
+#         verbose_name_plural = "Inscriptions d'élèves"
+
+
+
 class Eleve(models.Model):
     prenom = models.CharField(max_length=100)
     nom = models.CharField(max_length=100)
