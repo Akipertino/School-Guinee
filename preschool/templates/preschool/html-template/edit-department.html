@@ -1,0 +1,90 @@
+{% extends "preschool/html-template/adminBase.html" %}
+{% load static %}
+
+{% block titre %} Titre de etudiant dashboard {% endblock %}
+
+{% block contenu %}
+
+		<div class="page-wrapper">
+    <div class="content container-fluid">
+
+        <div class="page-header">
+            <div class="row align-items-center">
+                <div class="col">
+                    <h3 class="page-title">Modifier le Département</h3>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="departments.html">Départements</a></li>
+                        <li class="breadcrumb-item active">Modifier le Département</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-body">
+                        <form>
+                            <div class="row">
+                                <div class="col-12">
+                                    <h5 class="form-title"><span>Détails du Département</span></h5>
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                    <div class="form-group">
+                                        <label>ID du Département</label>
+                                        <input type="text" class="form-control" value="PRE1534">
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                    <div class="form-group">
+                                        <label>Nom du Département</label>
+                                        <input type="text" class="form-control" value="MCA">
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                    <div class="form-group">
+                                        <label>Responsable du Département</label>
+                                        <input type="text" class="form-control" value="Lois A">
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                    <div class="form-group">
+                                        <label>Date de Création du Département</label>
+                                        <input type="text" class="form-control" value="1992">
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                    <div class="form-group">
+                                        <label>Nombre d'Étudiants</label>
+                                        <input type="text" class="form-control" value="200">
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-primary">Soumettre</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+	</div>
+
+	<script src="{% static 'assets/js/jquery-3.6.0.min.js' %}"></script>
+
+	<script src="{% static 'assets/js/popper.min.js' %}"></script>
+	<script src="{% static 'assets/plugins/bootstrap/js/bootstrap.min.js' %}"></script>
+
+	<script src="{% static 'assets/plugins/slimscroll/jquery.slimscroll.min.js' %}"></script>
+
+	<script src="{% static 'assets/plugins/datatables/datatables.min.js' %}"></script>
+
+	<script src="{% static 'assets/js/script.js' %}"></script>
+
+
+{% endblock %}
+

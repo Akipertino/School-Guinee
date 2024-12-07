@@ -1,0 +1,179 @@
+{% extends "preschool/html-template/adminBase.html" %}
+{% load static %}
+
+{% block titre %} Modifier un Élève {% endblock %}
+
+{% block contenu %}
+
+<div class="page-wrapper">
+    <div class="content container-fluid">
+        <div class="page-header">
+            <div class="row align-items-center">
+                <div class="col">
+                    <h3 class="page-title">Modifier un Élève</h3>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{% url 'liste_eleves' %}">Élèves</a></li>
+                        <li class="breadcrumb-item active">Modifier un Élève</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-body">
+                        <form method="POST" action="{% url 'modification_eleve' eleve.id %}">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-12">
+                                    <h5 class="form-title"><span>Informations de l'Élève</span></h5>
+                                </div>
+                                <!-- Prénom -->
+                                <div class="col-12 col-sm-6">
+                                    <div class="form-group">
+                                        <label for="prenom">Prénom</label>
+                                        <input type="text" name="prenom" value="{{ eleve.prenom }}" class="form-control" required>
+                                    </div>
+                                </div>
+                                <!-- Nom -->
+                                <div class="col-12 col-sm-6">
+                                    <div class="form-group">
+                                        <label for="nom">Nom</label>
+                                        <input type="text" name="nom" value="{{ eleve.nom }}" class="form-control" required>
+                                    </div>
+                                </div>
+                                <!-- Matricule -->
+                                <div class="col-12 col-sm-6">
+                                    <div class="form-group">
+                                        <label for="matricule">Matricule</label>
+                                        <input type="text" name="matricule" value="{{ eleve.matricule }}" class="form-control" required>
+                                    </div>
+                                </div>
+                                <!-- Genre -->
+                                <div class="col-12 col-sm-6">
+                                    <div class="form-group">
+                                        <label for="genre">Genre</label>
+                                        <select name="genre" class="form-control" required>
+                                            <option value="Garçon" {% if eleve.genre == Garçon %}selected{% endif %}>Garçon</option>
+                                            <option value="Fille" {% if eleve.genre == Fille %}selected{% endif %}>Fille</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <!-- Date de Naissance -->
+                                <div class="col-12 col-sm-6">
+                                    <div class="form-group">
+                                        <label for="date_naissance">Date de Naissance</label>
+                                        <input type="date" name="date_naissance" value="{{ eleve.date_naissance }}" class="form-control" required>
+                                    </div>
+                                </div>
+                                <!-- Classe -->
+                                <div class="col-12 col-sm-6">
+                                    <div class="form-group">
+                                        <label for="classe">Classe</label>
+                                        <select name="classe" class="form-control" required>
+                                            <option value="7ème" {% if eleve.classe == 7ème %}selected{% endif %}>7ème</option>
+                                            <option value="8ème" {% if eleve.classe == 8ème %}selected{% endif %}>8ème</option>
+                                            <option value="9ème" {% if eleve.classe == 9ème %}selected{% endif %}>9ème</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <!-- Religion -->
+                                <div class="col-12 col-sm-6">
+                                    <div class="form-group">
+                                        <label for="religion">Religion</label>
+                                        <select name="religion" class="form-control" required>
+                                            <option value="Islam" {% if eleve.religion == Islam %}selected{% endif %}>Islam</option>
+                                            <option value="Christianisme" {% if eleve.religion == Christianisme %}selected{% endif %}>Christianisme</option>
+                                            <option value="Autres" {% if eleve.religion == Autres %}selected{% endif %}>Autres</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <!-- Photo -->
+                                <div class="col-12 col-sm-6">
+                                    <div class="form-group">
+                                        <label for="photo">Photo de l'Élève</label>
+                                        <input type="file" name="photo" class="form-control">
+                                        {% if eleve.photo %}
+                                            <img src="{{ eleve.photo.url }}" alt="Photo actuelle" class="mt-2" style="width: 100px; height: auto;">
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <h5 class="form-title"><span>Informations des Parents</span></h5>
+                                </div>
+                                <!-- Nom du Père -->
+                                <div class="col-12 col-sm-6">
+                                    <div class="form-group">
+                                        <label for="nom_pere">Nom du Père</label>
+                                        <input type="text" name="nom_pere" value="{{ eleve.nom_pere }}" class="form-control">
+                                    </div>
+                                </div>
+                                <!-- Profession du Père -->
+                                <div class="col-12 col-sm-6">
+                                    <div class="form-group">
+                                        <label for="profession_pere">Profession du Père</label>
+                                        <input type="text" name="profession_pere" value="{{ eleve.profession_pere }}" class="form-control">
+                                    </div>
+                                </div>
+                                <!-- Téléphone du Père -->
+                                <div class="col-12 col-sm-6">
+                                    <div class="form-group">
+                                        <label for="telephone_pere">Téléphone du Père</label>
+                                        <input type="tel" name="telephone_pere" value="{{ eleve.telephone_pere }}" class="form-control">
+                                    </div>
+                                </div>
+                                <!-- Email du Père -->
+                                <div class="col-12 col-sm-6">
+                                    <div class="form-group">
+                                        <label for="email_pere">Email du Père</label>
+                                        <input type="email" name="email_pere" value="{{ eleve.email_pere }}" class="form-control">
+                                    </div>
+                                </div>
+                                <!-- Nom de la Mère -->
+                                <div class="col-12 col-sm-6">
+                                    <div class="form-group">
+                                        <label for="nom_mere">Nom de la Mère</label>
+                                        <input type="text" name="nom_mere" value="{{ eleve.nom_mere }}" class="form-control">
+                                    </div>
+                                </div>
+                                <!-- Profession de la Mère -->
+                                <div class="col-12 col-sm-6">
+                                    <div class="form-group">
+                                        <label for="profession_mere">Profession de la Mère</label>
+                                        <input type="text" name="profession_mere" value="{{ eleve.profession_mere }}" class="form-control">
+                                    </div>
+                                </div>
+                                <!-- Téléphone de la Mère -->
+                                <div class="col-12 col-sm-6">
+                                    <div class="form-group">
+                                        <label for="telephone_mere">Téléphone de la Mère</label>
+                                        <input type="tel" name="telephone_mere" value="{{ eleve.telephone_mere }}" class="form-control">
+                                    </div>
+                                </div>
+                                <!-- Email de la Mère -->
+                                <div class="col-12 col-sm-6">
+                                    <div class="form-group">
+                                        <label for="email_mere">Email de la Mère</label>
+                                        <input type="email" name="email_mere" value="{{ eleve.email_mere }}" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-primary">Enregistrer les Modifications</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="{% static 'assets/js/jquery-3.6.0.min.js' %}"></script>
+<script src="{% static 'assets/js/popper.min.js' %}"></script>
+<script src="{% static 'assets/plugins/bootstrap/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'assets/plugins/slimscroll/jquery.slimscroll.min.js' %}"></script>
+<script src="{% static 'assets/plugins/datatables/datatables.min.js' %}"></script>
+<script src="{% static 'assets/js/script.js' %}"></script>
+
+{% endblock %}
