@@ -2,8 +2,7 @@ from django.db import models
 
 # Create your models here.
 
-from django.contrib.auth.models import AbstractUser
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser,User
 
 class Utilisateur(AbstractUser):
     ROLE_CHOICES = [
@@ -24,6 +23,20 @@ class Utilisateur(AbstractUser):
             raise ValueError("Un élève doit avoir un identifiant unique.")
         super().save(*args, **kwargs)
 
+
+
+class InscriptionEnseignant(models.Model):
+    username = models.CharField(max_length=150, unique=True)
+    email = models.EmailField(unique=True)
+    password = models.CharField(max_length=128)
+    matricule = models.CharField(max_length=20, unique=True)
+
+    def __str__(self):
+        return f"{self.username} ({self.matricule})"
+
+    class Meta:
+        verbose_name = "enseignant"
+        verbose_name_plural = "enseignant"
 
 
 class InscriptionEleve(models.Model):
@@ -104,15 +117,12 @@ class Enseignant(models.Model):
     date_entree = models.DateField()
     qualification = models.CharField(max_length=100)
     experience = models.CharField(max_length=100)
-    nom_utilisateur = models.CharField(max_length=100)
-    email = models.EmailField()
-    mot_de_passe = models.CharField(max_length=100)
     adresse = models.CharField(max_length=255)
     ville = models.CharField(max_length=100)
     pays = models.CharField(max_length=100)
 
     def __str__(self):
-        return self.nom
+        return f"{self.prenom} {self.nom} ({self.matricule})"
 
 class Departement(models.Model):
     id_departement = models.CharField(max_length=50, unique=True)
