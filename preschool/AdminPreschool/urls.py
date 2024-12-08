@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import accueil, static_page, ajouter_eleve, inscription_eleve, modification_eleve, details_eleve, modifier_eleve, liste_eleves, ajouter_departement, ajouter_matiere, ajouter_enseignant, liste_enseignants
+from .views import accueil, static_page, ajouter_eleve, inscription_eleve, modification_eleve, details_eleve, modifier_eleve, liste_eleves, ajouter_departement, ajouter_matiere, ajouter_enseignant, liste_enseignants,ajouter_cour
  
 urlpatterns = [
 	path('', accueil, name="accueil"),
@@ -13,5 +13,8 @@ urlpatterns = [
 	path('details_eleve', details_eleve, name="details_eleve"),
 	path('modification_eleve/<int:eleve_id>/', modification_eleve, name='modification_eleve'),
 	path('inscription_eleve', inscription_eleve, name="inscription_eleve"),
+	path('ajouter_cour', ajouter_cour, name="ajouter_cour"),
+ 
 	# path('modifier_eleve', modifier_eleve, name="modifier_eleve"),
+  # path('ajouter_matiere/', views.ajouter_matiere, name='ajouter_matiere'),
 ]

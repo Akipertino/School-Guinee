@@ -26,7 +26,7 @@
 					<div class="col-sm-12">
 						<div class="card">
 							<div class="card-body">
-								<form method="POST" action="{% url 'ajouter_matiere' %}">
+								<form method="POST" action="{% url 'ajouter_cour' %}">
 									{% csrf_token %}
 									<div class="row">
 										<div class="col-12">
@@ -40,14 +40,20 @@
 										</div>
 										<div class="col-12 col-sm-6">
 											<div class="form-group">
-												<label>Nom de la matière</label>
+												<label>Nom du cours</label>
 												<input type="text" name="nom" class="form-control">
 											</div>
 										</div>
 										<div class="col-12 col-sm-6">
 											<div class="form-group">
-												<label>Classe</label>
-												<input type="text" name="classe" class="form-control">
+												<label>Description</label>
+												<input type="text" name="description" class="form-control">
+											</div>
+										</div>
+										<div class="col-12 col-sm-6">
+											<div class="form-group">
+												<label>Enseignant</label>
+												<input type="text" name="enseignant" class="form-control">
 											</div>
 										</div>
 										<div class="col-12">

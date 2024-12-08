@@ -1,7 +1,7 @@
 
 from django.shortcuts import render, redirect
 # from .forms import EleveForm, EnseignantForm
-from .models import Eleve, Enseignant, Matiere, Departement, Utilisateur
+from .models import Eleve, Enseignant, Matiere, Departement, Utilisateur, Cour
 
 # Create your views here.
 
@@ -11,6 +11,8 @@ from django.contrib import messages
 
 
 from django.contrib.auth import login
+
+
 
 
 def inscription_eleve(request):
@@ -52,7 +54,17 @@ def inscription_eleve(request):
     return render(request, 'preschool/html-template/inscription_eleve.html')
 
 
-
+def ajouter_cour(request):
+  	if request.method == 'POST':
+				id_matiere = request.POST.get('id_matiere')
+				nom = request.POST.get('nom')
+				description = request.POST.get('description')
+				enseignant = request.POST.get('enseignant')
+    
+				cour = Cour(idenfiant=id_matiere, nom=nom, description=description, enseignant=enseignant)
+				cour.save()
+				return render(request, 'preschool/html-template/edit-subject.html')
+  	return render(request, 'preschool/html-template/add-subject.html') 
 
 def modification_eleve(request, eleve_id):
     # Récupérer l'élève à modifier ou retourner une 404 si l'élève n'existe pas
@@ -104,7 +116,7 @@ def modifier_eleve(request):
 
 def liste_enseignants(request):
     enseignants = Enseignant.objects.all()
-    return render(request, 'preschool/html-template/liste_enseignants.html', {'enseignants': enseignants})
+    return render(request, 'preschool/html-template/teachers.html', {'enseignants': enseignants})
 
 
 

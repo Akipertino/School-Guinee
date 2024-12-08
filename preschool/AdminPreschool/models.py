@@ -1,60 +1,78 @@
 from django.db import models
-
-# Create your models here.
-
-from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
+from django.contrib.auth.models import AbstractUser
+from django.conf import settings
+from django.db import models
 
 class Utilisateur(AbstractUser):
-    ROLE_CHOICES = [
-        ('admin', 'Administrateur'),
-        ('enseignant', 'Enseignant'),
-        ('eleve', 'Élève'),
-        ('comptable', 'Comptable'),
-    ]
-    
-    role = models.CharField(max_length=20, choices=ROLE_CHOICES)
-    identifiant_unique = models.CharField(max_length=50, unique=True, blank=True, null=True)
+    # Ajoutez ici des champs supplémentaires si nécessaire
+    pass
+# Modèle pour les cours
 
-    
-    
-    # Vérification de l'identifiant pour les élèves uniquement
-    def save(self, *args, **kwargs):
-        if self.role == 'eleve' and not self.identifiant_unique:
-            raise ValueError("Un élève doit avoir un identifiant unique.")
-        super().save(*args, **kwargs)
+# Modèle pour les enseignants
+class Enseignant(models.Model):
+    id_enseignant = models.CharField(max_length=50, unique=True)
+    nom = models.CharField(max_length=100)
+    sexe = models.CharField(max_length=30)
+    matiere = models.ForeignKey('Matiere', on_delete=models.CASCADE)  # Utilisation de chaîne de caractères pour éviter l'importation circulaire
+    date_naissance = models.DateField()
+    telephone = models.CharField(max_length=15)
+    date_entree = models.DateField()
+    qualification = models.CharField(max_length=100)
+    experience = models.CharField(max_length=100)
+    nom_utilisateur = models.CharField(max_length=100)
+    email = models.EmailField()
+    mot_de_passe = models.CharField(max_length=100)
+    adresse = models.CharField(max_length=255)
+    ville = models.CharField(max_length=100)
+    pays = models.CharField(max_length=100)
 
-
-
-class InscriptionEleve(models.Model):
-    matricule = models.CharField(max_length=100, unique=True, verbose_name="Matricule")
-    prenom = models.CharField(max_length=100, verbose_name="Prénom")
-    nom = models.CharField(max_length=100, verbose_name="Nom")
-    
     def __str__(self):
-        return f"{self.prenom} {self.nom} ({self.matricule})"
+        return self.nom
 
-    class Meta:
-        verbose_name = "Élève"
-        verbose_name_plural = "Élèves"
+class Cour(models.Model):
+    identifiant = models.CharField(max_length=100, unique=True)
+    nom = models.CharField(max_length=100, help_text="Nom du cours")
+    description = models.TextField(blank=True, help_text="Description du cours")
+    
+    # Utilisation de settings.AUTH_USER_MODEL pour pointer vers le modèle utilisateur personnalisé
+    enseignant = models.ForeignKey(Enseignant, on_delete=models.CASCADE)
+    
+    date_creation = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.nom
+
+    def clean(self):
+        if not self.nom:
+            raise ValidationError("Le nom du cours est requis.")
+        if not self.identifiant:
+            raise ValidationError("L'identifiant du cours est requis.")
 
 
+# Modèle pour les horaires des cours
+class Horaire(models.Model):
+    cours = models.ForeignKey(Cour, on_delete=models.CASCADE, related_name='horaires')
+    jour = models.CharField(
+        max_length=9,
+        choices=[
+            ('lundi', 'Lundi'), ('mardi', 'Mardi'), ('mercredi', 'Mercredi'),
+            ('jeudi', 'Jeudi'), ('vendredi', 'Vendredi'), ('samedi', 'Samedi'), ('dimanche', 'Dimanche')
+        ]
+    )
+    heure_debut = models.TimeField(help_text="Heure de début du cours")
+    heure_fin = models.TimeField(help_text="Heure de fin du cours")
 
-# class InscriptionEleve(models.Model):
-#     utilisateur = models.OneToOneField(User, on_delete=models.CASCADE, related_name="inscription", verbose_name="Utilisateur associé")
-#     eleve = models.OneToOneField(Eleve, on_delete=models.CASCADE, related_name="inscription", verbose_name="Élève")
-#     date_inscription = models.DateTimeField(auto_now_add=True, verbose_name="Date d'inscription")
-#     est_actif = models.BooleanField(default=True, verbose_name="Inscription active")
+    def __str__(self):
+        return f"{self.cours.nom} - {self.jour} ({self.heure_debut} - {self.heure_fin})"
 
-#     def __str__(self):
-#         return f"{self.utilisateur.username} - {self.eleve.matricule}"
-
-#     class Meta:
-#         verbose_name = "Inscription d'élève"
-#         verbose_name_plural = "Inscriptions d'élèves"
+    def clean(self):
+        if self.heure_debut >= self.heure_fin:
+            raise ValidationError("L'heure de fin doit être après l'heure de début.")
 
 
-
+# Modèle pour les élèves
 class Eleve(models.Model):
     prenom = models.CharField(max_length=100)
     nom = models.CharField(max_length=100)
@@ -78,58 +96,44 @@ class Eleve(models.Model):
     def __str__(self):
         return f"{self.prenom} {self.nom} ({self.matricule})"
 
-# Niveau de classe
+
+# Modèle pour les niveaux de classe
 class NiveauClasse(models.Model):
-    nom = models.CharField(max_length=50, unique=True)  # Exemple : "Terminale", "CM2", etc.
-    description = models.TextField(blank=True, null=True)  # Description optionnelle
+    nom = models.CharField(max_length=50, unique=True)
+    description = models.TextField(blank=True, null=True)
 
     def __str__(self):
         return self.nom
-        
+
+
+# Modèle pour les matières
 class Matiere(models.Model):
     id_matiere = models.CharField(max_length=50)
     nom = models.CharField(max_length=50)
-    classe = models.ForeignKey(NiveauClasse, on_delete = models.CASCADE)
+    classe = models.ForeignKey(NiveauClasse, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.nom
 
-class Enseignant(models.Model):
-    id_enseignant = models.CharField(max_length=50, unique=True)
-    nom = models.CharField(max_length=100)
-    sexe = models.CharField(max_length=30) #(max_length=10, choices=[('Homme', 'Homme'), ('Femme', 'Femme'), ('Autres', 'Autres')])
-    matiere = models.ForeignKey(Matiere, on_delete = models.CASCADE)
-    date_naissance = models.DateField()
-    telephone = models.CharField(max_length=15)
-    date_entree = models.DateField()
-    qualification = models.CharField(max_length=100)
-    experience = models.CharField(max_length=100)
-    nom_utilisateur = models.CharField(max_length=100)
-    email = models.EmailField()
-    mot_de_passe = models.CharField(max_length=100)
-    adresse = models.CharField(max_length=255)
-    ville = models.CharField(max_length=100)
-    pays = models.CharField(max_length=100)
 
-    def __str__(self):
-        return self.nom
 
+
+
+# Modèle pour les départements
 class Departement(models.Model):
     id_departement = models.CharField(max_length=50, unique=True)
     nom = models.CharField(max_length=100)
     responsable = models.CharField(max_length=100)
     date_debut = models.DateField()
-    nombre_etudiant = models.IntegerField()
+    nombre_etudiant = models.PositiveIntegerField()
 
     def __str__(self):
         return self.nom
 
-# Type d'utilisateur
+
+# Modèle pour les rôles d'utilisateur
 class Role(models.Model):
-    nom = models.CharField(max_length=50, unique=True)  # Exemple : "Élève", "Enseignant", "Administrateur"
+    nom = models.CharField(max_length=50, unique=True)
 
     def __str__(self):
         return self.nom
-
-
-

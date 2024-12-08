@@ -7,5 +7,10 @@
 </head>
 <body>
 	<h1>Présentaiton</h1>
+	{% for e in enseignants %}
+	<h1>e.nom</h1>
+	{% empty %}
+	<h1>Aucun élement n'existe dans  la base de donnée</h1>
+	{% endfor %}
 </body>
 </html>
