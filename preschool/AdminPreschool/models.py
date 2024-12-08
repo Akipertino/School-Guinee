@@ -5,6 +5,13 @@ from django.contrib.auth.models import AbstractUser
 from django.conf import settings
 from django.db import models
 
+<<<<<<< HEAD
+=======
+# Create your models here.
+
+from django.contrib.auth.models import AbstractUser,User
+
+>>>>>>> 2890c5a866a1afe2e91940b793a462eee24fe025
 class Utilisateur(AbstractUser):
     # Ajoutez ici des champs supplémentaires si nécessaire
     pass
@@ -28,6 +35,30 @@ class Enseignant(models.Model):
     ville = models.CharField(max_length=100)
     pays = models.CharField(max_length=100)
 
+<<<<<<< HEAD
+=======
+
+
+class InscriptionEnseignant(models.Model):
+    username = models.CharField(max_length=150, unique=True)
+    email = models.EmailField(unique=True)
+    password = models.CharField(max_length=128)
+    matricule = models.CharField(max_length=20, unique=True)
+
+    def __str__(self):
+        return f"{self.username} ({self.matricule})"
+
+    class Meta:
+        verbose_name = "enseignant"
+        verbose_name_plural = "enseignant"
+
+
+class InscriptionEleve(models.Model):
+    matricule = models.CharField(max_length=100, unique=True, verbose_name="Matricule")
+    prenom = models.CharField(max_length=100, verbose_name="Prénom")
+    nom = models.CharField(max_length=100, verbose_name="Nom")
+    
+>>>>>>> 2890c5a866a1afe2e91940b793a462eee24fe025
     def __str__(self):
         return self.nom
 
@@ -115,7 +146,26 @@ class Matiere(models.Model):
     def __str__(self):
         return self.nom
 
+<<<<<<< HEAD
 
+=======
+class Enseignant(models.Model):
+    id_enseignant = models.CharField(max_length=50, unique=True)
+    nom = models.CharField(max_length=100)
+    sexe = models.CharField(max_length=30) #(max_length=10, choices=[('Homme', 'Homme'), ('Femme', 'Femme'), ('Autres', 'Autres')])
+    matiere = models.ForeignKey(Matiere, on_delete = models.CASCADE)
+    date_naissance = models.DateField()
+    telephone = models.CharField(max_length=15)
+    date_entree = models.DateField()
+    qualification = models.CharField(max_length=100)
+    experience = models.CharField(max_length=100)
+    adresse = models.CharField(max_length=255)
+    ville = models.CharField(max_length=100)
+    pays = models.CharField(max_length=100)
+
+    def __str__(self):
+        return f"{self.prenom} {self.nom} ({self.matricule})"
+>>>>>>> 2890c5a866a1afe2e91940b793a462eee24fe025
 
 
 

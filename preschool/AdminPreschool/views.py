@@ -12,6 +12,39 @@ from django.contrib import messages
 
 from django.contrib.auth import login
 
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from .models import Enseignant
+from django.contrib.auth.hashers import make_password
+
+def inscription_enseignant(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        password_confirm = request.POST.get('password_confirm')
+        matricule = request.POST.get('matricule')
+
+        # Vérification des champs
+        if Enseignant.objects.filter(matricule=matricule).exists():
+            messages.error(request, "Ce matricule est déjà utilisé.")
+            return render(request, 'preschool/html-template/inscription_enseignant.html', {'erreur': "Ce matricule est déjà utilisé."})
+
+        # Création de l'enseignant
+        enseignant = Enseignant(
+            username=username,
+            email=email,
+            password=make_password(password),  # Hacher le mot de passe
+            matricule=matricule
+        )
+        enseignant.save()
+
+        messages.success(request, "Inscription réussie. Vous pouvez maintenant vous connecter.")
+        return redirect('connexion')  # Rediriger vers la page de connexion
+
+    return render(request, 'preschool/html-template/inscription_enseignant.html')
+
+
 
 
 
@@ -157,14 +190,11 @@ def ajouter_enseignant(request):
 		date_entree = request.POST.get('date_entree')
 		qualification = request.POST.get('qualification')
 		experience = request.POST.get('experience')
-		nom_utilisateur = request.POST.get('nom_utilisateur')
-		email = request.POST.get('email')
-		mot_de_passe = request.POST.get('mot_de_passe')
 		adresse = request.POST.get('adresse')
 		ville = request.POST.get('ville')
 		pays = request.POST.get('pays')
 
-		enseignant = Enseignant(id_enseignant=id_enseignant, nom=nom, sexe=sexe, date_naissance=date_naissance, telephone=telephone, date_entree=date_entree, qualification=qualification, experience=experience, nom_utilisateur=nom_utilisateur, email=email, mot_de_passe=mot_de_passe, adresse=adresse, ville=ville, pays=pays)
+		enseignant = Enseignant(id_enseignant=id_enseignant, nom=nom, sexe=sexe, date_naissance=date_naissance, telephone=telephone, date_entree=date_entree, qualification=qualification, experience=experience,  adresse=adresse, ville=ville, pays=pays)
 		enseignant.save()
 
 		return redirect('ajouter_enseignant')
