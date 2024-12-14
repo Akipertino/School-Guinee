@@ -25,7 +25,7 @@ def connexion(request):
 			if(user.role == 'eleve'):
 				return redirect('student_dashboard')
 			elif(user.role == 'admin'):
-				return redirect('admin-dashboard')
+				return redirect('admin_dashboard')
 			elif(user.role == 'enseignant'):
 				return redirect('teacher-dashboard')
 			else:

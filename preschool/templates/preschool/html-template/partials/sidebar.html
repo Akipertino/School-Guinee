@@ -77,7 +77,7 @@
         </li>
         {% endif %}
 
-        {% if role == 'admin' %}
+        {% if user.role == 'admin' %}
         <li>
           <a href="{% url 'static_page' 'holiday' %}"><i class="fas fa-holly-berry"></i> <span>Vacances</span></a>
         </li>
