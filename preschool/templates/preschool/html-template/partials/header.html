@@ -1,0 +1,121 @@
+<!-- Début entête de page -->
+{% load static %}
+<div class="header">
+   <div class="header-left">
+      <a href="index.html" class="logo">
+         <img src="{% static 'assets/img/logo.png' %}" alt="Logo principal">
+      </a>
+      <a href="index.html" class="logo logo-small">
+         <img src="{% static 'assets/img/logo-small.png' %}" alt="Logo secondaire" width="30" height="30">
+      </a>
+   </div>
+   <a href="javascript:void(0);" id="toggle_btn">
+      <i class="fas fa-align-left"></i>
+   </a>
+   <div class="top-nav-search">
+      <form>
+         <input type="text" class="form-control" placeholder="Rechercher ici" aria-label="Recherche">
+         <button class="btn" type="submit" aria-label="Effectuer la recherche">
+         <i class="fas fa-search"></i>
+         </button>
+      </form>
+   </div>
+   <a class="mobile_btn" id="mobile_btn">
+      <i class="fas fa-bars"></i>
+   </a>
+   <ul class="nav user-menu">
+      <li class="nav-item dropdown noti-dropdown">
+         <a href="{% url 'ajouter_eleve' %}" class="dropdown-toggle nav-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="far fa-bell"></i>
+            <span class="badge badge-pill">3</span>
+         </a>
+         <div class="dropdown-menu notifications">
+            <div class="topnav-dropdown-header">
+               <span class="notification-title">Notifications</span>
+               <a href="javascript:void(0)" class="clear-noti">Effacer tout</a>
+            </div>
+            <div class="noti-content">
+               <ul class="notification-list">
+                  <li class="notification-message">
+                     <a href="#">
+                        <div class="media">
+                           <span class="avatar avatar-sm">
+                              <img class="avatar-img rounded-circle" alt="Image utilisateur" src="{% static 'assets/img/profiles/avatar-02.jpg' %}">
+                           </span>
+                           <div class="media-body">
+                              <p class="noti-details"><span class="noti-title">Carlson Tech</span> a approuvé <span class="noti-title">votre estimation</span></p>
+                              <p class="noti-time"><span class="notification-time">Il y a 4 minutes</span></p>
+                           </div>
+                        </div>
+                     </a>
+                  </li>
+                  <li class="notification-message">
+                     <a href="#">
+                        <div class="media">
+                           <span class="avatar avatar-sm">
+                              <img class="avatar-img rounded-circle" alt="Image utilisateur" src="{% static 'assets/img/profiles/avatar-11.jpg' %}">
+                           </span>
+                           <div class="media-body">
+                              <p class="noti-details"><span class="noti-title">International Software Inc</span> vous a envoyé une facture de <span class="noti-title">$218</span></p>
+                              <p class="noti-time"><span class="notification-time">Il y a 6 minutes</span></p>
+                           </div>
+                        </div>
+                     </a>
+                  </li>
+                  <li class="notification-message">
+                     <a href="#">
+                        <div class="media">
+                           <span class="avatar avatar-sm">
+                              <img class="avatar-img rounded-circle" alt="Image utilisateur" src="{% static 'assets/img/profiles/avatar-17.jpg' %}">
+                           </span>
+                           <div class="media-body">
+                              <p class="noti-details"><span class="noti-title">John Hendry</span> a envoyé une demande d'annulation pour l'<span class="noti-title">Apple iPhone XR</span></p>
+                              <p class="noti-time"><span class="notification-time">Il y a 8 minutes</span></p>
+                           </div>
+                        </div>
+                     </a>
+                  </li>
+                  <li class="notification-message">
+                     <a href="#">
+                        <div class="media">
+                           <span class="avatar avatar-sm">
+                              <img class="avatar-img rounded-circle" alt="Image utilisateur" src="{% static 'assets/img/profiles/avatar-13.jpg' %}">
+                           </span>
+                           <div class="media-body">
+                              <p class="noti-details"><span class="noti-title">Mercury Software Inc</span> a ajouté un nouveau produit : <span class="noti-title">Apple MacBook Pro</span></p>
+                              <p class="noti-time"><span class="notification-time">Il y a 12 minutes</span></p>
+                           </div>
+                        </div>
+                     </a>
+                  </li>
+               </ul>
+            </div>
+            <div class="topnav-dropdown-footer">
+               <a href="#">Voir toutes les notifications</a>
+            </div>
+         </div>
+      </li>
+      <li class="nav-item dropdown has-arrow">
+         <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span class="user-img">
+               <img class="rounded-circle" src="{% static 'assets/img/profiles/avatar-01.jpg' %}" width="31" alt="Ryan Taylor">
+            </span>
+         </a>
+         <div class="dropdown-menu">
+            <div class="user-header">
+               <div class="avatar avatar-sm">
+                  <img src="{% static 'assets/img/profiles/avatar-01.jpg' %}" alt="Image utilisateur" class="avatar-img rounded-circle">
+               </div>
+               <div class="user-text">
+                  <h6>{{user.username}}</h6>
+                  <p class="text-muted mb-0">{{user.role}}</p>
+               </div>
+            </div>
+            <a class="dropdown-item" href="#">Mon profil</a>
+            <a class="dropdown-item" href="#">Boîte de réception</a>
+            <a class="dropdown-item" href="{% url 'deconnexion' %}">Se déconnecter</a>
+         </div>
+      </li>
+   </ul>
+</div>
+<!-- Fin entête de page -->

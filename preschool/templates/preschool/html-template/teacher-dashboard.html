@@ -1,0 +1,320 @@
+
+
+
+{% extends "preschool/html-template/adminBase.html" %}
+
+{% block titre %}PreSkool - Tableau de bord {%  endblock %}
+{% load static %}
+
+
+{% block contenu %}
+
+<div class="page-wrapper">
+	<div class="content container-fluid">
+
+		<div class="page-header">
+			<div class="row">
+				<div class="col-sm-12">
+					<h3 class="page-title">Bienvenue Jonathan!</h3>
+					<ul class="breadcrumb">
+						<li class="breadcrumb-item"><a href="index.html">Tableau de bord</a></li>
+						<li class="breadcrumb-item active">Tableau de bord Enseignant</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+
+				<div class="row">
+					<div class="col-xl-3 col-sm-6 col-12 d-flex">
+						<div class="card bg-five w-100">
+							<div class="card-body">
+								<div class="db-widgets d-flex justify-content-between align-items-center">
+									<div class="db-icon">
+										<i class="fas fa-chalkboard"></i>
+									</div>
+									<div class="db-info">
+										<h3>04/06</h3>
+										<h6>Cours totaux</h6>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-xl-3 col-sm-6 col-12 d-flex">
+						<div class="card bg-six w-100">
+							<div class="card-body">
+								<div class="db-widgets d-flex justify-content-between align-items-center">
+									<div class="db-icon">
+										<i class="fas fa-user-graduate"></i>
+									</div>
+									<div class="db-info">
+										<h3>40/60</h3>
+										<h6>Étudiants totaux</h6>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-xl-3 col-sm-6 col-12 d-flex">
+						<div class="card bg-seven w-100">
+							<div class="card-body">
+								<div class="db-widgets d-flex justify-content-between align-items-center">
+									<div class="db-icon">
+										<i class="fas fa-book-open"></i>
+									</div>
+									<div class="db-info">
+										<h3>30/50</h3>
+										<h6>Cours totaux</h6>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-xl-3 col-sm-6 col-12 d-flex">
+						<div class="card bg-eight w-100">
+							<div class="card-body">
+								<div class="db-widgets d-flex justify-content-between align-items-center">
+									<div class="db-icon">
+										<i class="fas fa-clock"></i>
+									</div>
+									<div class="db-info">
+										<h3>15/20</h3>
+										<h6>Heures totales</h6>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+    <div class="col-12 col-lg-12 col-xl-9">
+        <div class="row">
+            <div class="col-12 col-lg-8 col-xl-8 d-flex">
+                <div class="card flex-fill">
+                    <div class="card-header">
+                        <div class="row align-items-center">
+                            <div class="col-6">
+                                <h5 class="card-title">Leçon à venir</h5>
+                            </div>
+                            <div class="col-6">
+                                <span class="float-right view-link"><a href="#">Voir tous les cours</a></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pt-3 pb-3">
+                        <div class="table-responsive lesson">
+                            <table class="table table-center">
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="date">
+                                                <b>4 août, mardi</b>
+                                                <p>14h30 - 15h30 (60 min)</p>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="date">
+                                                <b>Leçon 30</b>
+                                                <p>3.1 Ipsuum dolor</p>
+                                            </div>
+                                        </td>
+                                        <td><a href="#">Confirmée</a></td>
+                                        <td><button type="submit" class="btn btn-info">Reprogrammer</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="date">
+                                                <b>5 août, mercredi</b>
+                                                <p>15h00 - 16h30 (90 min)</p>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="date">
+                                                <b>Leçon 31</b>
+                                                <p>3.2 Ipsuum dolor</p>
+                                            </div>
+                                        </td>
+                                        <td><a href="#">Confirmée</a></td>
+                                        <td><button type="submit" class="btn btn-info">Reprogrammer</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="date">
+                                                <b>6 août, jeudi</b>
+                                                <p>11h00 - 12h00 (20 min)</p>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="date">
+                                                <b>Leçon 32</b>
+                                                <p>3.3 Ipsuum dolor</p>
+                                            </div>
+                                        </td>
+                                        <td><a href="#">Confirmée</a></td>
+                                        <td><button type="submit" class="btn btn-info">Reprogrammer</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-4 col-xl-4 d-flex">
+                <div class="card flex-fill">
+                    <div class="card-header">
+                        <div class="row align-items-center">
+                            <div class="col-12">
+                                <h5 class="card-title">Progrès du semestre</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dash-widget">
+                        <div class="circle-bar circle-bar1">
+                            <div class="circle-graph1" data-percent="50">
+                                <b>50%</b>
+                            </div>
+                        </div>
+                        <div class="dash-info">
+                            <h6>Progrès des leçons</h6>
+                            <h4>30 <span>/ 60</span></h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-lg-6 col-xl-8 d-flex">
+                <div class="card flex-fill">
+                    <div class="card-header">
+                        <div class="row align-items-center">
+                            <div class="col-6">
+                                <h5 class="card-title">Activité d'enseignement</h5>
+                            </div>
+                            <div class="col-6">
+                                <ul class="list-inline-group text-right mb-0 pl-0">
+                                    <li class="list-inline-item">
+                                        <div class="form-group mb-0 amount-spent-select">
+                                            <select class="form-control form-control-sm">
+                                                <option>Hebdomadaire</option>
+                                                <option>Mensuel</option>
+                                                <option>Annuel</option>
+                                            </select>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div id="apexcharts-area"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-6 col-xl-4 d-flex">
+                <div class="card flex-fill">
+                    <div class="card-header">
+                        <h5 class="card-title">Historique des enseignements</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="teaching-card">
+                            <ul class="activity-feed">
+                                <li class="feed-item">
+                                    <div class="feed-date1">5 sept., 9h - 10h (60 min)</div>
+                                    <span class="feed-text1"><a>Lorem ipsum dolor</a></span>
+                                    <p><span>En cours</span></p>
+                                </li>
+                                <li class="feed-item">
+                                    <div class="feed-date1">4 sept., 14h - 15h (70 min)</div>
+                                    <span class="feed-text1"><a>Et dolore magna</a></span>
+                                    <p>Terminé</p>
+                                </li>
+                                <li class="feed-item">
+                                    <div class="feed-date1">2 sept., 13h - 14h (80 min)</div>
+                                    <span class="feed-text1"><a>Exercitation ullamco</a></span>
+                                    <p>Terminé</p>
+                                </li>
+                                <li class="feed-item">
+                                    <div class="feed-date1">30 août, 10h - 12h (90 min)</div>
+                                    <span class="feed-text1"><a>Occaecat cupidatat</a></span>
+                                    <p>Terminé</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-lg-12 col-xl-3 d-flex">
+        <div class="card flex-fill">
+            <div class="card-header">
+                <div class="row align-items-center">
+                    <div class="col-12">
+                        <h5 class="card-title">Calendrier</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div id="calendar-doctor" class="calendar-container"></div>
+                <div class="calendar-info calendar-info1">
+                    <div class="calendar-details">
+                        <p>09h</p>
+                        <h6 class="calendar-blue d-flex justify-content-between align-items-center">Fermentum <span>09h - 10h</span></h6>
+                    </div>
+                    <div class="calendar-details">
+                        <p>10h</p>
+                        <h6 class="calendar-violet d-flex justify-content-between align-items-center">Pharetra et <span>10h - 11h</span></h6>
+                    </div>
+                    <div class="calendar-details">
+                        <p>11h</p>
+                        <h6 class="calendar-red d-flex justify-content-between align-items-center">Pause <span>11h - 11h30</span></h6>
+                    </div>
+                    <div class="calendar-details">
+                        <p>12h</p>
+                        <h6 class="calendar-orange d-flex justify-content-between align-items-center">Massa <span>11h30 - 12h00</span></h6>
+                    </div>
+                    <div class="calendar-details">
+                        <p>09h</p>
+                        <h6 class="calendar-blue d-flex justify-content-between align-items-center">Fermentum <span>09h - 10h</span></h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+			</div>
+
+			<footer>
+				<p>Copyright © 2020 Dreamguys.</p>
+			</footer>
+
+		</div>
+
+
+
+
+
+
+
+
+		<script src="{% static 'assets/js/jquery-3.6.0.min.js' %}"></script>
+
+		<script src="{% static 'assets/js/popper.min.js' %}"></script>
+		<script src="{% static 'assets/plugins/bootstrap/js/bootstrap.min.js' %}"></script>
+
+		<script src="{% static 'assets/plugins/slimscroll/jquery.slimscroll.min.js' %}"></script>
+
+		<script src="{% static 'assets/plugins/apexchart/apexcharts.min.js' %}"></script>
+		<script src="{% static 'assets/plugins/apexchart/chart-data.js' %}"></script>
+
+		<script src="{% static 'assets/plugins/simple-calendar/jquery.simple-calendar.js' %}"></script>
+		<script src="{% static 'assets/js/calander.js' %}"></script>
+
+		<script src="{% static 'assets/js/circle-progress.min.js' %}"></script>
+
+		<script src="{% static 'assets/js/script.js' %}"></script>
+
+		{% endblock %}

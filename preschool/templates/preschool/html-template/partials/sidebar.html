@@ -1,0 +1,180 @@
+<!-- Début sidebar -->
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-inner slimscroll">
+    <div id="sidebar-menu" class="sidebar-menu">
+      <ul>
+
+        {% if user.role == 'admin' %}
+        <li class="menu-title">
+          <span>Menu principal</span>
+        </li>
+        <li class="submenu active">
+          <a href="#"><i class="fas fa-user-graduate"></i> <span> Tableau de bord</span> <span class="menu-arrow"></span></a>
+          <ul>
+            <li><a href="{% url 'static_page' 'index' %}" class="{% if request.path == '/index/' %}active{% endif %}">Administrateur</a></li>
+            <li><a href="{% url 'static_page' 'teacher-dashboard' %}" class="{% if request.path == '/teacher-dashboard/' %}active{% endif %}">Enseignant</a></li>
+            <li><a href="{% url 'static_page' 'student-dashboard' %}" class="{% if request.path == '/student-dashboard/' %}active{% endif %}">Etudiant</a></li>
+          </ul>
+        </li>
+        <li class="submenu">
+          <a href="#"><i class="fas fa-user-graduate"></i> <span> Etudiants</span> <span class="menu-arrow"></span></a>
+          <ul>
+            <li><a href="{% url 'liste_eleves' %}" class="{% if request.path == '/liste_eleves' %}active{% endif %}">Liste des Etudiants</a></li>
+            <li><a href="{% url 'details_eleve' %}" class="{% if request.path == '/details_eleve' %}active{% endif %}">Voir Etudiant</a></li>
+            <li><a href="{% url 'ajouter_eleve' %}" class="{% if request.path == '/ajouter_eleve' %}active{% endif %}">Ajouter Etudiant</a></li>
+            <li><a href="" class="{% if request.path == '/modifier_eleve' %}active{% endif %}">Modifier Etudiant</a></li>
+          </ul>
+        </li>
+        <li class="submenu">
+          <a href="#"><i class="fas fa-chalkboard-teacher"></i> <span> Enseignants</span> <span class="menu-arrow"></span></a>
+          <ul>
+            <li><a href="{% url 'liste_enseignants' %}" class="{% if request.path == '/liste_enseignants/' %}active{% endif %}">Liste des enseignants</a></li>
+            <li><a href="{% url 'static_page' 'teacher-details' %}" class="{% if request.path == '/teacher-details/' %}active{% endif %}">Voir enseignant</a></li>
+            <li><a href="{% url 'ajouter_enseignant' %}" class="{% if request.path == '/ajouter_enseignant/' %}active{% endif %}">Ajouter enseignant</a></li>
+            <li><a href="{% url 'static_page' 'edit-teacher' %}" class="{% if request.path == '/edit-teacher/' %}active{% endif %}">Modifier enseignant</a></li>
+          </ul>
+        </li>
+        <li class="submenu">
+          <a href="#"><i class="fas fa-building"></i> <span> Départements</span> <span class="menu-arrow"></span></a>
+          <ul>
+            <li><a href="{% url 'static_page' 'departments' %}" class="{% if request.path == '/departments/' %}active{% endif %}">Liste des départements</a></li>
+            <li><a href="{% url 'ajouter_departement' %}" class="{% if request.path == '/ajouter_departement' %}active{% endif %}">Ajouter département</a></li>
+            <li><a href="{% url 'static_page' 'edit-department' %}" class="{% if request.path == '/edit-department/' %}active{% endif %}">Modifier département</a></li>
+          </ul>
+        </li>
+        <li class="submenu">
+          <a href="#"><i class="fas fa-book-reader"></i> <span> Matières</span> <span class="menu-arrow"></span></a>
+          <ul>
+            <li><a href="{% url 'static_page' 'subjects' %}" class="{% if request.path == '/subjects/' %}active{% endif %}">Liste des matières</a></li>
+            <li><a href="{% url 'ajouter_matiere' %}" class="{% if request.path == '/add-subject/' %}active{% endif %}">Ajouter matière</a></li>
+            <li><a href="{% url 'static_page' 'edit-subject' %}" class="{% if request.path == '/edit-subject/' %}active{% endif %}">Modifier matière</a></li>
+          </ul>
+          <!-- <ul>
+            <li><a href="{% url 'static_page' 'subjects' %}">Liste des matières</a></li>
+            <li><a href="{% url 'static_page' 'add-subject' %}">Ajouter matière</a></li>
+            <li><a href="{% url 'static_page' 'edit-subject' %}">Modifier matière</a></li>
+          </ul> -->
+        </li>
+        {% endif %}
+
+        {% if user.role == 'comptable' or user.role == 'admin' %}
+        <li class="menu-title">
+          <span>Gestion</span>
+        </li>
+        <li class="submenu">
+          <a href="#"><i class="fas fa-file-invoice-dollar"></i> <span> Comptes</span> <span class="menu-arrow"></span></a>
+          <ul>
+            <li><a href="{% url 'static_page' 'fees-collections' %}">Collecte des frais</a></li>
+            <li><a href="{% url 'static_page' 'expenses' %}">Dépenses</a></li>
+            <li><a href="{% url 'static_page' 'salary' %}">Salaires</a></li>
+            <li><a href="{% url 'static_page' 'add-fees-collection' %}">Ajouter frais</a></li>
+            <li><a href="{% url 'static_page' 'add-expenses' %}">Ajouter dépenses</a></li>
+            <li><a href="{% url 'static_page' 'add-salary' %}">Ajouter salaire</a></li>
+          </ul>
+        </li>   
+        <li>
+          <a href="{% url 'static_page' 'fees' %}"><i class="fas fa-comment-dollar"></i> <span>Frais</span></a>
+        </li>
+        {% endif %}
+
+        {% if role == 'admin' %}
+        <li>
+          <a href="{% url 'static_page' 'holiday' %}"><i class="fas fa-holly-berry"></i> <span>Vacances</span></a>
+        </li>
+        <!--<li>
+          <a href="{% url 'static_page' 'exam' %}"><i class="fas fa-clipboard-list"></i> <span>Liste des examens</span></a>
+        </li>
+        <li>
+          <a href="{% url 'static_page' 'event' %}"><i class="fas fa-calendar-day"></i> <span>Événements</span></a>
+        </li>
+         <li>
+          <a href="{% url 'static_page' 'time-table' %}"><i class="fas fa-table"></i> <span>Emploi du temps</span></a>
+        </li>
+        <li>
+          <a href="{% url 'static_page' 'library' %}"><i class="fas fa-book"></i> <span>Bibliothèque</span></a>
+        </li>
+        <li class="menu-title">
+          <span>Pages</span>
+        </li>  -->
+        
+        <li class="submenu">
+          <a href="#"><i class="fas fa-shield-alt"></i> <span> Authentification </span> <span class="menu-arrow"></span></a>
+          <!--  <ul>
+            <li><a href="{% url 'static_page' 'login' %}">Connexion</a></li>
+            <li><a href="{% url 'static_page' 'register' %}">Inscription</a></li>
+            <li><a href="{% url 'static_page' 'forgot-password' %}">Mot de passe oublié</a></li>
+            <li><a href="{% url 'static_page' 'error-404' %}">Page d'erreur</a></li>
+          </ul> -->
+          <ul>
+            <li><a href="{% url 'static_page' 'login' %}" class="{% if request.path == '/login/' %}active{% endif %}">Connexion</a></li>
+            <li><a href="{% url 'inscription_eleve' %}" class="{% if request.path == '/register/' %}active{% endif %}">Inscription</a></li>
+            <li><a href="{% url 'static_page' 'forgot-password' %}" class="{% if request.path == '/forgot-password/' %}active{% endif %}">Mot de passe oublié</a></li>
+            <li><a href="{% url 'static_page' 'error-404' %}" class="{% if request.path == '/error-404/' %}active{% endif %}">Page d'erreur</a></li>
+          </ul>
+        </li>
+        {% endif %}
+        <!-- <li>
+          <a href="{% url 'static_page' 'blank-page' %}"><i class="fas fa-file"></i> <span>Page vide</span></a>
+        </li> -->
+        <!-- <li class="menu-title">
+          <span>Autres</span>
+        </li>
+        <li>
+          <a href="{% url 'static_page' 'sports' %}"><i class="fas fa-baseball-ball"></i> <span>Sports</span></a>
+        </li>
+        <li>
+          <a href="{% url 'static_page' 'hostel' %}"><i class="fas fa-hotel"></i> <span>Résidence</span></a>
+        </li>
+        <li>
+          <a href="{% url 'static_page' 'transport' %}"><i class="fas fa-bus"></i> <span>Transport</span></a>
+        </li>
+        <li class="menu-title">
+          <span>Interface UI</span>
+        </li>
+        <li>
+          <a href="{% url 'static_page' 'components' %}"><i class="fas fa-vector-square"></i> <span>Composants</span></a>
+        </li> -->
+        <!-- <li class="submenu">
+          <a href="#"><i class="fas fa-columns"></i> <span> Formulaires </span> <span class="menu-arrow"></span></a>
+          <ul>
+            <li><a href="{% url 'static_page' 'form-basic-inputs' %}">Entrées de base</a></li>
+            <li><a href="{% url 'static_page' 'form-input-groups' %}">Groupes d'entrées</a></li>
+            <li><a href="{% url 'static_page' 'form-horizontal' %}">Formulaire horizontal</a></li>
+            <li><a href="{% url 'static_page' 'form-vertical' %}">Formulaire vertical</a></li>
+            <li><a href="{% url 'static_page' 'form-mask' %}">Masque de formulaire</a></li>
+            <li><a href="{% url 'static_page' 'form-validation' %}">Validation du formulaire</a></li>
+          </ul>
+        </li>
+        <li class="submenu">
+          <a href="#"><i class="fas fa-table"></i> <span> Tables </span> <span class="menu-arrow"></span></a>
+          <ul>
+            <li><a href="{% url 'static_page' 'tables-basic' %}">Tables de base</a></li>
+            <li><a href="{% url 'static_page' 'data-tables' %}">Tableaux de données</a></li>
+          </ul>
+        </li> -->
+        <!-- <li class="submenu">
+          <a href="javascript:void(0);"><i class="fas fa-code"></i> <span>Niveaux multiples</span> <span class="menu-arrow"></span></a>
+          <ul>
+            <li class="submenu">
+              <a href="javascript:void(0);"> <span>Niveau 1</span> <span class="menu-arrow"></span></a>
+              <ul>
+                <li><a href="javascript:void(0);"><span>Niveau 2</span></a></li>
+                <li class="submenu">
+                  <a href="javascript:void(0);"> <span> Niveau 2</span> <span class="menu-arrow"></span></a>
+                  <ul>
+                    <li><a href="javascript:void(0);">Niveau 3</a></li>
+                    <li><a href="javascript:void(0);">Niveau 3</a></li>
+                  </ul>
+                </li>
+                <li><a href="javascript:void(0);"> <span>Niveau 2</span></a></li>
+              </ul>
+            </li>
+            <li>
+              <a href="javascript:void(0);"> <span>Niveau 1</span></a>
+            </li> -->
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

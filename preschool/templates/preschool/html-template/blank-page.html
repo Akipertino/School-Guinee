@@ -1,0 +1,41 @@
+{% extends "preschool/html-template/adminBase.html" %}
+{% load static %}
+
+{% block titre %} Titre de etudiant dashboard {% endblock %}
+
+{% block contenu %}
+
+  <div class="page-wrapper">
+            <div class="content container-fluid">
+               <div class="page-header">
+                  <div class="row">
+                     <div class="col-sm-12">
+                        <h3 class="page-title">Blank Page</h3>
+                        <ul class="breadcrumb">
+                           <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                           <li class="breadcrumb-item active">Blank Page</li>
+                        </ul>
+                     </div>
+                  </div>
+               </div>
+               <div class="row">
+                  <div class="col-sm-12">
+                     Contents here
+                  </div>
+               </div>
+            </div>
+         </div>
+
+   <script src="{% static 'assets/js/jquery-3.6.0.min.js' %}"></script>
+
+   <script src="{% static 'assets/js/popper.min.js' %}"></script>
+   <script src="{% static 'assets/plugins/bootstrap/js/bootstrap.min.js' %}"></script>
+
+   <script src="{% static 'assets/plugins/slimscroll/jquery.slimscroll.min.js' %}"></script>
+
+   <script src="{% static 'assets/plugins/datatables/datatables.min.js' %}"></script>
+
+   <script src="{% static 'assets/js/script.js' %}"></script>
+
+
+{% endblock %}

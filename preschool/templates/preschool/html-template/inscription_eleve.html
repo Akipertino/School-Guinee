@@ -1,0 +1,75 @@
+{% extends "preschool/html-template/adminBase.html" %}
+{% load static %}
+
+{% block titre %} Inscription Élève {% endblock %}
+
+{% block contenu %}
+
+<div class="main-wrapper login-body">
+    <div class="login-wrapper">
+        <div class="container">
+            <div class="loginbox">
+                <div class="login-left">
+                    <img class="img-fluid" src="{% static 'assets/img/logo-white.png' %}" alt="Logo">
+                </div>
+                <div class="login-right">
+                    <div class="login-right-wrap">
+                        <h1>Inscription</h1>
+                        <p class="account-subtitle">Accédez à votre tableau de bord</p>
+
+                        <!-- Affichage des messages d'erreur -->
+                        {% if erreur %}
+                        <p class="text-danger">{{ erreur }}</p>
+                        {% endif %}
+
+                        <form method="POST" action="{% url 'inscription_eleve' %}">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <input class="form-control" type="text" name="username" placeholder="Nom d'utilisateur" value="{{ username|default_if_none:'' }}" required>
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" type="email" name="email" placeholder="Email" value="{{ email|default_if_none:'' }}" required>
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" type="password" name="password" placeholder="Mot de passe" required>
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" type="password" name="password_confirm" placeholder="Confirmer le mot de passe" required>
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" type="text" name="matricule" placeholder="Identifiant élève" value="{{ matricule|default_if_none:'' }}" required>
+                            </div>
+                            <div class="form-group mb-0">
+                                <button class="btn btn-primary btn-block" type="submit">S'inscrire</button>
+                            </div>
+                        </form>
+
+                        <div class="login-or">
+                            <span class="or-line"></span>
+                            <span class="span-or">ou</span>
+                        </div>
+
+                        <div class="social-login">
+                            <span>S'inscrire avec</span>
+                            <a href="#" class="facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="google"><i class="fab fa-google"></i></a>
+                        </div>
+
+                        <div class="text-center dont-have">
+                            Vous avez déjà un compte ? <a href="">Connexion</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="{% static 'assets/js/jquery-3.6.0.min.js' %}"></script>
+<script src="{% static 'assets/js/popper.min.js' %}"></script>
+<script src="{% static 'assets/plugins/bootstrap/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'assets/plugins/slimscroll/jquery.slimscroll.min.js' %}"></script>
+<script src="{% static 'assets/plugins/datatables/datatables.min.js' %}"></script>
+<script src="{% static 'assets/js/script.js' %}"></script>
+
+{% endblock %}

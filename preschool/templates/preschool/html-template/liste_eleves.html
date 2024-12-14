@@ -1,0 +1,85 @@
+{% extends "preschool/html-template/adminBase.html" %}
+{% load static %}
+
+{% block titre %} Preschool Étudiants {% endblock %}
+
+{% block contenu %}
+<div class="page-wrapper">
+   <div class="content container-fluid">
+      <div class="page-header">
+         <div class="row align-items-center">
+            <div class="col">
+               <h3 class="page-title">Étudiants</h3>
+               <ul class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="index.html">Tableau de bord</a></li>
+                  <li class="breadcrumb-item active">Etudiants</li>
+               </ul>
+            </div>
+            <div class="col-auto text-right float-right ml-auto">
+               <a href="#" class="btn btn-outline-primary mr-2"><i class="fas fa-download"></i> Télécharger</a>
+               <a href="add-student.html" class="btn btn-primary"><i class="fas fa-plus"></i></a>
+            </div>
+         </div>
+      </div>
+      <div class="row">
+         <div class="col-sm-12">
+            <div class="card card-table">
+               <div class="card-body">
+                  <div class="table-responsive">
+                     <table class="table table-hover table-center mb-0 datatable">
+                        <thead>
+                           <tr>
+                              <th>ID</th>
+                              <th>Nom</th>
+                              <th>Classe</th>
+                              <th>Date de naissance</th>
+                              <th>Nom du parent</th>
+                              <th>Numéro de téléphone</th>
+                              <th>Adresse</th>
+                              <th class="text-right">Action</th>
+                           </tr>
+                        </thead>
+                        <tbody>
+                           <!-- element de la base de données -->
+                           {% for eleve in eleves %}
+                         <tr>
+                             <!-- <td>{{ forloop.counter }}</td> -->
+                             <td>{{ eleve.prenom }}</td>
+                             <td>{{ eleve.nom }}</td>
+                             <td>{{ eleve.matricule }}</td>
+                             <td>{{ eleve.date_naissance }}</td>
+                             <td>{{ eleve.classe }}</td>
+                             <td>{{ eleve.numero_telephone }}</td>
+                             <td>{{ eleve.adresse_actuelle }}</td>
+                             <td class="text-right">Action</td>
+                         </tr> 
+                {% empty %}
+                <tr>
+                    <td colspan="8" class="text-center">Aucun élève trouvé.</td>
+                </tr>
+                {% endfor %}
+                        </tbody>
+                     </table>
+                     <div>
+                        <h2>Debug Info</h2>
+                        <p>Nombre d'élèves : {{ eleves.count }}</p>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <footer>
+      <p>Copyright © 2020 Dreamguys.</p>
+   </footer>
+</div>
+   <script src="{% static 'assets/js/jquery-3.6.0.min.js' %}"></script>
+   <script src="{% static 'assets/js/popper.min.js' %}"></script>
+   <script src="{% static 'assets/plugins/bootstrap/js/bootstrap.min.js' %}"></script>
+   <script src="{% static 'assets/plugins/slimscroll/jquery.slimscroll.min.js' %}"></script>
+   <script src="{% static 'assets/plugins/datatables/datatables.min.js' %}"></script>
+   <script src="{% static 'assets/js/script.js' %}"></script>
+
+
+{% endblock %}

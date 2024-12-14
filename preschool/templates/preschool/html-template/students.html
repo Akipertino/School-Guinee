@@ -1,0 +1,95 @@
+{% extends "preschool/html-template/adminBase.html" %}
+{% load static %}
+
+{% block titre %} Preschool Étudiants {% endblock %}
+
+{% block contenu %}
+<div class="page-wrapper">
+   <div class="content container-fluid">
+      <div class="page-header">
+         <div class="row align-items-center">
+            <div class="col">
+               <h3 class="page-title">Élèves</h3>
+               <ul class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="index.html">Tableau de bord</a></li>
+                  <li class="breadcrumb-item active">Élèves</li>
+               </ul>
+            </div>
+            <div class="col-auto text-right float-right ml-auto">
+               <a href="#" class="btn btn-outline-primary mr-2"><i class="fas fa-download"></i> Télécharger</a>
+               <a href="{% url 'ajouter_eleve' %}" class="btn btn-primary"><i class="fas fa-plus"></i></a>
+            </div>
+         </div>
+      </div>
+      <div class="row">
+         <div class="col-sm-12">
+            <div class="card card-table">
+               <div class="card-body">
+                  <div class="table-responsive">
+                     <table class="table table-hover table-center mb-0 datatable">
+                        <thead>
+                           <tr>
+                              <th class="text-center">Matricule</th>
+                              <th class="text-center">Profil</th>
+                              <th class="text-center">Nom</th>
+                              <th class="text-center">Date de naissance</th>
+                              <th class="text-center">Nom du parent</th>
+                              <th class="text-center">Tél du père</th>
+                              <th class="text-center">Classe</th>
+                              <th class="text-center">Action</th>
+                           </tr>
+                        </thead>
+                        <tbody>
+                           <!-- élément de la base de données -->
+                           {% for eleve in eleves %}
+                           <tr>
+                               <td>{{ eleve.matricule }}</td>
+                               <td>
+                                <h2 class="table-avatar">
+                                  <a href="teacher-details.html" class="avatar avatar-sm mr-2">
+                                    {% if eleve.photo %}
+                                    <img class="avatar-img rounded-circle" src="{{ eleve.photo.url }}" alt="{{ eleve.prenom }}">
+                                    {% else %}
+                                    <img class="avatar-img rounded-circle" src="{% static 'assets/img/default-avatar.png' %}" alt="{{ eleve.prenom }}">
+                                    {% endif %}
+                                  </a>
+                                  <a href="teacher-details.html">{{ eleve.prenom }}</a>
+                                </h2>
+                               </td>
+                               <td>{{ eleve.nom }}</td>
+                               <td>{{ eleve.date_naissance }}</td>
+                               <td>{{ eleve.nom_pere }}</td>
+                               <td>{{ eleve.telephone_pere }}</td>
+                               <td>{{ eleve.classe }}</td>
+                               <td>
+                                  <div class="text-left actions">
+                                    <a class="btn btn-sm bg-success-light mr-2" href="details-eleve.html" title="Consulter les détails"><i class="fas fa-eye"></i></a>
+                                    <a href="{% url 'modification_eleve' eleve.id %}" class="btn btn-sm bg-success-light mr-2"> <i class="fas fa-pen"></i></a>
+                                    <a href="#" class="btn btn-sm bg-danger-light"><i class="fas fa-trash"></i></a>
+                                  </div>
+                               </td>
+                           </tr>
+                           {% empty %}
+                           <tr>
+                               <td colspan="8" class="text-center">Aucun élève trouvé.</td>
+                           </tr>
+                           {% endfor %}
+                        </tbody>
+                     </table>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <footer>
+      <p>Copyright © 2020 Dreamguys.</p>
+   </footer>
+</div>
+   <script src="{% static 'assets/js/jquery-3.6.0.min.js' %}"></script>
+   <script src="{% static 'assets/js/popper.min.js' %}"></script>
+   <script src="{% static 'assets/plugins/bootstrap/js/bootstrap.min.js' %}"></script>
+   <script src="{% static 'assets/plugins/slimscroll/jquery.slimscroll.min.js' %}"></script>
+   <script src="{% static 'assets/plugins/datatables/datatables.min.js' %}"></script>
+   <script src="{% static 'assets/js/script.js' %}"></script>
+{% endblock %}
