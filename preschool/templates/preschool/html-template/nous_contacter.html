@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+	{% load static %}
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Nous Contacter - School-Guinée</title>
+	<link rel="stylesheet" href="{% static 'assets/plugins/bootstrap/css/bootstrap.min.css' %}">
+	<style>
+		body {
+			font-family: 'Arial', sans-serif;
+			background-color: #e6f0ff;
+			margin: 0;
+			padding: 0;
+		}
+
+		.contact-section {
+			padding: 60px 20px;
+			background-color: white;
+		}
+
+		.contact-section h2 {
+			color: #007bff;
+			margin-bottom: 40px;
+			text-align: center;
+			font-size: 2.5rem;
+			animation: fadeIn 1s ease-in-out;
+		}
+
+		.contact-section .form-control {
+			border-radius: 10px;
+			border: 1px solid #007bff;
+			padding: 10px;
+			margin-bottom: 20px;
+		}
+
+		.contact-section .form-control:focus {
+			border-color: #0056b3;
+			box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+		}
+
+		.contact-section .btn {
+			background-color: #007bff;
+			border: none;
+			padding: 10px 30px;
+			font-size: 1.2rem;
+			border-radius: 25px;
+			transition: background-color 0.3s ease;
+		}
+
+		.contact-section .btn:hover {
+			background-color: #0056b3;
+		}
+
+		.contact-info {
+			background-color: #f8f9fa;
+			padding: 30px;
+			border-radius: 10px;
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+			margin-top: 40px;
+		}
+
+		.contact-info h3 {
+			color: #007bff;
+			margin-bottom: 20px;
+			font-size: 1.8rem;
+		}
+
+		.contact-info p {
+			font-size: 1rem;
+			color: #555;
+			line-height: 1.6;
+		}
+
+		.contact-info i {
+			color: #007bff;
+			margin-right: 10px;
+		}
+
+		.map-container {
+			margin-top: 40px;
+			border-radius: 10px;
+			overflow: hidden;
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+		}
+
+		/* Animations */
+		@keyframes fadeIn {
+			from {
+				opacity: 0;
+			}
+			to {
+				opacity: 1;
+			}
+		}
+	</style>
+</head>
+
+<body>
+	{% include 'preschool/html-template/partials/navbar.html' %}
+
+	<!-- Section Contact -->
+	<section class="contact-section">
+		<div class="container">
+			<h2>Nous Contacter</h2>
+			<div class="row">
+				<div class="col-md-6">
+					<form>
+						<div class="form-group">
+							<input type="text" class="form-control" placeholder="Votre nom" required>
+						</div>
+						<div class="form-group">
+							<input type="email" class="form-control" placeholder="Votre email" required>
+						</div>
+						<div class="form-group">
+							<input type="text" class="form-control" placeholder="Sujet" required>
+						</div>
+						<div class="form-group">
+							<textarea class="form-control" rows="5" placeholder="Votre message" required></textarea>
+						</div>
+						<button type="submit" class="btn btn-primary">Envoyer</button>
+					</form>
+				</div>
+				<div class="col-md-6">
+					<div class="contact-info">
+						<h3>Coordonnées</h3>
+						<p><i class="fas fa-map-marker-alt"></i> Adresse : Yimbaya, Conakry, Guinée</p>
+						<p><i class="fas fa-phone"></i> Téléphone : +224 622 40 26 38</p>
+						<p><i class="fas fa-envelope"></i> Email : contact@school-guinee.com</p>
+						<p><i class="fas fa-clock"></i> Horaires : Lundi - Vendredi, 8h - 20h</p>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="map-container">
+						<iframe
+							src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3979.715123456789!2d-13.712345678912345!3d9.512345678912345!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zOcKwMzAnNDQuNCJOIDEzwrA0Mic0OC4xIlc!5e0!3m2!1sfr!2sgn!4v1234567890123"
+							width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Pied de page -->
+	<footer class="bg-dark text-white text-center py-4">
+		<p class="mb-0">© 2024 School-Guinée. Tous droits réservés.</p>
+	</footer>
+
+	<script src="{% static 'assets/plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+	<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</body>
+
+</html>

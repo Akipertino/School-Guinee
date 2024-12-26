@@ -1,0 +1,61 @@
+<!-- Début sidebar -->
+<div class="sidebar" id="sidebar">
+    <div class="sidebar-inner slimscroll">
+      <div id="sidebar-menu" class="sidebar-menu">
+        <ul>
+          <li class="menu-title">
+            <span>Menu principal</span>
+          </li>
+          <li class="submenu active">
+            <a href="#"><i class="fas fa-tachometer-alt"></i> <span> Tableau de bord</span> <span class="menu-arrow"></span></a>
+            <ul>
+              <li><a href="{% url 'accountant_dashboard' %}" class="{% if request.path == '/accountant_dashboard/' %}active{% endif %}">Tableau de bord</a></li>
+            </ul>
+          </li>
+          <li class="submenu">
+            <a href="#"><i class="fas fa-file-invoice-dollar"></i> <span> Frais</span> <span class="menu-arrow"></span></a>
+            <ul>
+              <li><a href="#" class="{% if request.path == '/liste_frais/' %}active{% endif %}">Liste des Frais</a></li>
+              <li><a href="#" class="{% if request.path == '/ajouter_frais/' %}active{% endif %}">Ajouter des Frais</a></li>
+              <li><a href="#" class="{% if request.path == '/modifier_frais/' %}active{% endif %}">Modifier des Frais</a></li>
+            </ul>
+          </li>
+          <li class="submenu">
+            <a href="#"><i class="fas fa-money-bill-wave"></i> <span> Dépenses</span> <span class="menu-arrow"></span></a>
+            <ul>
+              <li><a href="#" class="{% if request.path == '/liste_depenses/' %}active{% endif %}">Liste des Dépenses</a></li>
+              <li><a href="#" class="{% if request.path == '/ajouter_depense/' %}active{% endif %}">Ajouter une Dépense</a></li>
+              <li><a href="#" class="{% if request.path == '/modifier_depense/' %}active{% endif %}">Modifier une Dépense</a></li>
+            </ul>
+          </li>
+          <li class="submenu">
+            <a href="#"><i class="fas fa-coins"></i> <span> Salaires</span> <span class="menu-arrow"></span></a>
+            <ul>
+              <li><a href="#" class="{% if request.path == '/liste_salaires/' %}active{% endif %}">Liste des Salaires</a></li>
+              <li><a href="#" class="{% if request.path == '/ajouter_salaire/' %}active{% endif %}">Ajouter un Salaire</a></li>
+              <li><a href="#" class="{% if request.path == '/modifier_salaire/' %}active{% endif %}">Modifier un Salaire</a></li>
+            </ul>
+          </li>
+          <li class="submenu">
+            <a href="#"><i class="fas fa-chart-line"></i> <span> Rapports</span> <span class="menu-arrow"></span></a>
+            <ul>
+              <li><a href="#" class="{% if request.path == '/rapport_frais/' %}active{% endif %}">Rapport des Frais</a></li>
+              <li><a href="#" class="{% if request.path == '/rapport_depenses/' %}active{% endif %}">Rapport des Dépenses</a></li>
+              <li><a href="#" class="{% if request.path == '/rapport_salaires/' %}active{% endif %}">Rapport des Salaires</a></li>
+            </ul>
+          </li>
+          <li class="submenu">
+            <a href="#"><i class="fas fa-cogs"></i> <span> Paramètres</span> <span class="menu-arrow"></span></a>
+            <ul>
+              <li><a href="#" class="{% if request.path == '/gestion_comptes/' %}active{% endif %}">Gestion des Comptes</a></li>
+              <li><a href="#" class="{% if request.path == '/gestion_categories/' %}active{% endif %}">Gestion des Catégories</a></li>
+            </ul>
+          </li>
+          <!-- Déconnexion -->
+          <li>
+            <a href="{% url 'deconnexion' %}"><i class="fas fa-sign-out-alt"></i> <span>Déconnexion</span></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>

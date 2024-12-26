@@ -1,0 +1,18 @@
+{% extends 'preschool/html-template/adminBase.html' %}
+
+{% block contenu %}
+<h2>Gestion des inscriptions</h2>
+<ul>
+    {% for eleve in eleves_en_attente %}
+    <li>
+        {{ eleve.prenom }} {{ eleve.nom }} ({{ eleve.matricule }}) - 
+        <form method="post" style="display:inline;">
+            {% csrf_token %}
+            <input type="hidden" name="eleve_id" value="{{ eleve.id }}">
+            <button type="submit" name="action" value="valider">Valider</button>
+            <button type="submit" name="action" value="refuser">Refuser</button>
+        </form>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

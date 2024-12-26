@@ -10,8 +10,18 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
+
+
 from pathlib import Path
 import os
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'  # Serveur SMTP de Gmail
+EMAIL_PORT = 587  # Port pour TLS
+EMAIL_USE_TLS = True  # Utiliser TLS (chiffrement)
+EMAIL_HOST_USER = 'fkipertino@gmail.com'  # Votre adresse email Gmail
+EMAIL_HOST_PASSWORD = 'gppy jggk hxnm hdyh'  # Mot de passe d'application ou mot de passe principal
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent

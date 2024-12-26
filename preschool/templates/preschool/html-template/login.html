@@ -9,39 +9,45 @@
          <div class="container">
             <div class="loginbox">
                <div class="login-left">
-                  <img class="img-fluid" src="assets/img/logo-white.png" alt="Logo">
+                  <img class="img-fluid" src="{% static 'assets/img/logo-white.png' %}" alt="Logo">
                </div>
                <div class="login-right">
                   <div class="login-right-wrap">
                      <h1>Connexion</h1>
-                     <p class="account-subtitle">Acceder à votre Tableau de bord</p>
-                     {% if messages %}3
-                        {% for m in messages %}
-                           <p class="text-danger">{{m}}</p>
+                     <p class="account-subtitle">Accéder à votre Tableau de bord</p>
+                     
+                     <!-- Messages Django -->
+                     {% if messages %}
+                        {% for message in messages %}
+                           <p class="text-danger">{{ message }}</p>
                         {% endfor %}
                      {% endif %}
-                     <form method="POST" action="{% url 'connexion' %}">
+
+                     <!-- Formulaire de connexion -->
+                     <form method="POST" action="">
                         {% csrf_token %}
                         <div class="form-group">
-                           <input class="form-control" name="username" type="text" placeholder="Nom d'utilisateur">
+                           <input class="form-control" name="username" type="text" placeholder="Nom d'utilisateur" required>
                         </div>
                         <div class="form-group">
-                           <input class="form-control" name="password" type="password" placeholder="Password">
+                           <div class="input-group">
+                              <input class="form-control" name="password" id="password" type="password" placeholder="Mot de passe" required>
+                              <div class="input-group-append">
+                                 <span class="input-group-text" id="togglePassword">
+                                    <i class="fa fa-eye"></i>
+                                 </span>
+                              </div>
+                           </div>
                         </div>
                         <div class="form-group">
                            <button class="btn btn-primary btn-block" type="submit">Se connecter</button>
                         </div>
                      </form>
-                     <div class="text-center forgotpass"><a href="forgot-password.html">Mot de passe oublié ?</a></div>
-                     <div class="login-or">
-                        <span class="or-line"></span>
-                        <span class="span-or">OU</span>
+
+                     <!-- Mot de passe oublié -->
+                     <div class="text-center forgotpass">
+                        <a href="">Mot de passe oublié ?</a>
                      </div>
-                     <!-- <div class="social-login">
-                        <span>Login with</span>
-                        <a href="#" class="facebook"><i class="fab fa-facebook-f"></i></a><a href="#" class="google"><i class="fab fa-google"></i></a>
-                     </div> -->
-                     <div class="text-center dont-have">Vous n'avez pas de compte ? <a href="register.html">S'inscrire</a></div>
                   </div>
                </div>
             </div>
@@ -49,11 +55,30 @@
       </div>
    </div>
    
+   <!-- Scripts -->
    <script src="{% static 'assets/js/jquery-3.6.0.min.js' %}"></script>
    <script src="{% static 'assets/js/popper.min.js' %}"></script>
    <script src="{% static 'assets/plugins/bootstrap/js/bootstrap.min.js' %}"></script>
    <script src="{% static 'assets/plugins/slimscroll/jquery.slimscroll.min.js' %}"></script>
    <script src="{% static 'assets/plugins/datatables/datatables.min.js' %}"></script>
    <script src="{% static 'assets/js/script.js' %}"></script>
+
+   <!-- Script pour basculer la visibilité du mot de passe -->
+   <script>
+      document.addEventListener("DOMContentLoaded", function() {
+         const togglePassword = document.querySelector("#togglePassword");
+         const password = document.querySelector("#password");
+
+         togglePassword.addEventListener("click", function () {
+            // Basculer le type de l'input entre "password" et "text"
+            const type = password.getAttribute("type") === "password" ? "text" : "password";
+            password.setAttribute("type", type);
+
+            // Basculer l'icône entre "oeil ouvert" et "oeil fermé"
+            this.querySelector("i").classList.toggle("fa-eye-slash");
+            this.querySelector("i").classList.toggle("fa-eye");
+         });
+      });
+   </script>
    
 {% endblock %}

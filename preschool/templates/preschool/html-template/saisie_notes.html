@@ -1,0 +1,159 @@
+{% extends "preschool/html-template/adminBase.html" %}
+{% load static %}
+
+{% block titre %}Saisie de notes{% endblock %}
+
+{% block contenu %}
+<div class="page-wrapper">
+    {% include 'preschool/html-template/partials/header.html' %}
+    {% include 'preschool/html-template/partials/sidebar.html' %}
+
+    <div class="content container-fluid">
+        <div class="page-header">
+            <div class="row align-items-center">
+                <div class="col">
+                    <h3 class="page-title">Saisie de notes</h3>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="">Tableau de bord</a></li>
+                        <li class="breadcrumb-item active">Saisie de notes</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Messages Django -->
+        {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+            <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">{{ message }}</div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <!-- Formulaire de sélection de classe -->
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">Sélectionnez une classe</h5>
+                    </div>
+                    <div class="card-body">
+                        <form id="filtreForm">
+                            <div class="form-group">
+                                <label for="classe">Classe</label>
+                                <select name="classe" id="classe" class="form-control" required>
+                                    <option value="">Sélectionnez une classe</option>
+                                    {% for classe in classes %}
+                                    <option value="{{ classe.id }}">{{ classe.nom }} - {{ classe.niveau.nom }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Filtrer</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tableau des élèves et notes par matière -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">Notes des élèves</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover table-center mb-0 datatable">
+                                <thead>
+                                    <tr>
+                                        <th>N°</th>
+                                        <th>Prénom et Nom</th>
+                                        <th>Matière</th>
+                                        <th>Note 1er semestre</th>
+                                        <th>Note 2ème semestre</th>
+                                        <th>Note 3ème semestre</th>
+                                        <th>Moyenne générale</th>
+                                        <th>Mention</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tableBody">
+                                    <!-- Les lignes seront mises à jour dynamiquement -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Scripts -->
+<script src="{% static 'assets/js/jquery-3.6.0.min.js' %}"></script>
+<script src="{% static 'assets/js/popper.min.js' %}"></script>
+<script src="{% static 'assets/plugins/bootstrap/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'assets/plugins/slimscroll/jquery.slimscroll.min.js' %}"></script>
+<script src="{% static 'assets/plugins/datatables/datatables.min.js' %}"></script>
+<script src="{% static 'assets/js/script.js' %}"></script>
+
+<!-- Script pour filtrer les élèves et afficher les notes -->
+<script>
+    $(document).ready(function() {
+        // Lorsque le formulaire est soumis
+        $('#filtreForm').on('submit', function(e) {
+            e.preventDefault(); // Empêcher la soumission normale du formulaire
+
+            // Récupérer la valeur sélectionnée
+            var classeId = $('#classe').val();
+
+            // Envoyer une requête AJAX pour récupérer les données
+            $.ajax({
+                url: "", // URL de la vue Django pour filtrer les notes
+                method: "GET",
+                data: {
+                    classe: classeId
+                },
+                success: function(response) {
+                    // Remplir le tableau avec les données reçues
+                    var tableBody = $('#tableBody');
+                    tableBody.empty(); // Vider le tableau
+
+                    if (response.eleves.length > 0) {
+                        var numero = 1; // Numéro de l'élève
+                        response.eleves.forEach(function(eleve) {
+                            // Afficher les informations de l'élève
+                            tableBody.append(`<tr>
+                                <td>${numero}</td>
+                                <td>${eleve.prenom} ${eleve.nom}</td>
+                                <td colspan="6"></td>
+                            </tr>`);
+
+                            // Afficher les notes par matière
+                            eleve.notes.forEach(function(note) {
+                                tableBody.append(`<tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td>${note.matiere}</td>
+                                    <td>${note.note_semestre_1 || 'N/A'}</td>
+                                    <td>${note.note_semestre_2 || 'N/A'}</td>
+                                    <td>${note.note_semestre_3 || 'N/A'}</td>
+                                    <td>${note.moyenne_generale || 'N/A'}</td>
+                                    <td>${note.mention || 'N/A'}</td>
+                                </tr>`);
+                            });
+
+                            numero++; // Incrémenter le numéro de l'élève
+                        });
+                    } else {
+                        tableBody.append(`<tr><td colspan="8" class="text-center">Aucun élève trouvé pour cette classe.</td></tr>`);
+                    }
+                },
+                error: function() {
+                    alert("Une erreur est survenue lors de la récupération des données.");
+                }
+            });
+        });
+    });
+</script>
+{% endblock %}

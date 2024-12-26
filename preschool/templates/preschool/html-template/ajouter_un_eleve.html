@@ -1,7 +1,7 @@
 {% extends "preschool/html-template/adminBase.html" %}
 {% load static %}
 
-{% block titre %} Tableau de bord de l'étudiant {% endblock %}
+{% block titre %} Ajouter un Élève {% endblock %}
 
 {% block contenu %}
 
@@ -22,7 +22,8 @@
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-body">
-                        <form method="post" enctype="multipart/form-data">
+                        
+                        <form method="POST" action="" enctype="multipart/form-data">
                             {% csrf_token %}
                             <div class="row">
                                 <div class="col-12">
@@ -32,77 +33,61 @@
                                 <div class="col-12 col-sm-6">
                                     <div class="form-group">
                                         <label for="prenom">Prénom</label>
-                                        {{ form.prenom }}
+                                        <input type="text" name="prenom" class="form-control" required>
                                     </div>
                                 </div>
                                 <!-- Nom -->
                                 <div class="col-12 col-sm-6">
                                     <div class="form-group">
                                         <label for="nom">Nom</label>
-                                        {{ form.nom }}
-                                    </div>
-                                </div>
-                                <!-- Matricule -->
-                                <div class="col-12 col-sm-6">
-                                    <div class="form-group">
-                                        <label for="matricule">Matricule</label>
-                                        {{ form.matricule }}
-                                    </div>
-                                </div>
-                                <!-- Genre -->
-                                <div class="col-12 col-sm-6">
-                                    <div class="form-group">
-                                        <label for="genre">Genre</label>
-                                        {{ form.genre }}
-                                    </div>
-                                </div>
-                                <!-- Date de Naissance -->
-                                <div class="col-12 col-sm-6">
-                                    <div class="form-group">
-                                        <label for="date_naissance">Date de Naissance</label>
-                                        {{ form.date_naissance }}
+                                        <input type="text" name="nom" class="form-control" required>
                                     </div>
                                 </div>
                                 <!-- Classe -->
                                 <div class="col-12 col-sm-6">
                                     <div class="form-group">
                                         <label for="classe">Classe</label>
-                                        {{ form.classe }}
+                                        <select name="classe" class="form-control" required>
+                                            {% for classe in classes %}
+                                                <option value="{{ classe.id }}">{{ classe.nom }} ({{ classe.niveau.nom }})</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                                <!-- Genre -->
+                                <div class="col-12 col-sm-6">
+                                    <div class="form-group">
+                                        <label for="genre">Genre</label>
+                                        <select name="genre" class="form-control" required>
+                                            <option value="Homme">Homme</option>
+                                            <option value="Femme">Femme</option>
+                                            <option value="Autres">Autres</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <!-- Date de Naissance -->
+                                <div class="col-12 col-sm-6">
+                                    <div class="form-group">
+                                        <label for="date_naissance">Date de Naissance</label>
+                                        <input type="date" name="date_naissance" class="form-control" required>
                                     </div>
                                 </div>
                                 <!-- Religion -->
                                 <div class="col-12 col-sm-6">
                                     <div class="form-group">
                                         <label for="religion">Religion</label>
-                                        {{ form.religion }}
-                                    </div>
-                                </div>
-                                <!-- Numéro de Téléphone -->
-                                <div class="col-12 col-sm-6">
-                                    <div class="form-group">
-                                        <label for="telephone">Numéro de Téléphone</label>
-                                        {{ form.numero_telephone }}
-                                    </div>
-                                </div>
-                                <!-- Numéro d'Admission -->
-                                <div class="col-12 col-sm-6">
-                                    <div class="form-group">
-                                        <label for="admission">Numéro d'Admission</label>
-                                        {{ form.numero_admission }}
-                                    </div>
-                                </div>
-                                <!-- Section -->
-                                <div class="col-12 col-sm-6">
-                                    <div class="form-group">
-                                        <label for="section">Section</label>
-                                        {{ form.section }}
+                                        <select name="religion" class="form-control" required>
+                                            <option value="Islam">Islam</option>
+                                            <option value="Christianisme">Christianisme</option>
+                                            <option value="Autres">Autres</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <!-- Photo -->
                                 <div class="col-12 col-sm-6">
                                     <div class="form-group">
                                         <label for="photo">Photo de l'Élève</label>
-                                        {{ form.photo }}
+                                        <input type="file" name="photo" class="form-control">
                                     </div>
                                 </div>
                                 <div class="col-12">
@@ -112,75 +97,60 @@
                                 <div class="col-12 col-sm-6">
                                     <div class="form-group">
                                         <label for="nom_pere">Nom du Père</label>
-                                        {{ form.nom_pere }}
+                                        <input type="text" name="nom_pere" class="form-control">
                                     </div>
                                 </div>
                                 <!-- Profession du Père -->
                                 <div class="col-12 col-sm-6">
                                     <div class="form-group">
                                         <label for="profession_pere">Profession du Père</label>
-                                        {{ form.profession_pere }}
+                                        <input type="text" name="profession_pere" class="form-control">
                                     </div>
                                 </div>
                                 <!-- Téléphone du Père -->
                                 <div class="col-12 col-sm-6">
                                     <div class="form-group">
                                         <label for="telephone_pere">Téléphone du Père</label>
-                                        {{ form.telephone_pere }}
+                                        <input type="tel" name="telephone_pere" class="form-control">
                                     </div>
                                 </div>
                                 <!-- Email du Père -->
                                 <div class="col-12 col-sm-6">
                                     <div class="form-group">
                                         <label for="email_pere">Email du Père</label>
-                                        {{ form.email_pere }}
+                                        <input type="email" name="email_pere" class="form-control">
                                     </div>
                                 </div>
                                 <!-- Nom de la Mère -->
                                 <div class="col-12 col-sm-6">
                                     <div class="form-group">
                                         <label for="nom_mere">Nom de la Mère</label>
-                                        {{ form.nom_mere }}
+                                        <input type="text" name="nom_mere" class="form-control">
                                     </div>
                                 </div>
                                 <!-- Profession de la Mère -->
                                 <div class="col-12 col-sm-6">
                                     <div class="form-group">
                                         <label for="profession_mere">Profession de la Mère</label>
-                                        {{ form.profession_mere }}
+                                        <input type="text" name="profession_mere" class="form-control">
                                     </div>
                                 </div>
                                 <!-- Téléphone de la Mère -->
                                 <div class="col-12 col-sm-6">
                                     <div class="form-group">
                                         <label for="telephone_mere">Téléphone de la Mère</label>
-                                        {{ form.telephone_mere }}
+                                        <input type="tel" name="telephone_mere" class="form-control">
                                     </div>
                                 </div>
                                 <!-- Email de la Mère -->
                                 <div class="col-12 col-sm-6">
                                     <div class="form-group">
                                         <label for="email_mere">Email de la Mère</label>
-                                        {{ form.email_mere }}
-                                    </div>
-                                </div>
-                                <!-- Adresse Actuelle -->
-                                <div class="col-12 col-sm-6">
-                                    <div class="form-group">
-                                        <label for="adresse_actuelle">Adresse Actuelle</label>
-                                        {{ form.adresse_actuelle }}
-                                    </div>
-                                </div>
-                                <!-- Adresse Permanente -->
-                                <div class="col-12 col-sm-6">
-                                    <div class="form-group">
-                                        <label for="adresse_permanente">Adresse Permanente</label>
-                                        {{ form.adresse_permanente }}
+                                        <input type="email" name="email_mere" class="form-control">
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <button type="submit" class="btn btn-primary">Soumettre</button>
-                                    <button class="btn btn-primary" id="tester">Tester l'ajout</button>
                                 </div>
                             </div>
                         </form>
@@ -191,14 +161,4 @@
     </div>
 </div>
 
-
-
-
-
-<script src="{% static 'assets/js/jquery-3.6.0.min.js' %}"></script>
-<script src="{% static 'assets/js/popper.min.js' %}"></script>
-<script src="{% static 'assets/plugins/bootstrap/js/bootstrap.min.js' %}"></script>
-<script src="{% static 'assets/plugins/slimscroll/jquery.slimscroll.min.js' %}"></script>
-<script src="{% static 'assets/plugins/datatables/datatables.min.js' %}"></script>
-<script src="{% static 'assets/js/script.js' %}"></script>
 {% endblock %}

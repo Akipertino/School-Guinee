@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+	{% load static %}
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>À propos - School-Guinée</title>
+	<link rel="stylesheet" href="{% static 'assets/plugins/bootstrap/css/bootstrap.min.css' %}">
+	<style>
+		body {
+			font-family: 'Arial', sans-serif;
+			background-color: #e6f0ff; /* Bleu clair pour le fond */
+			margin: 0;
+			padding: 0;
+		}
+
+		.navbar {
+			background-color: #007bff; /* Bleu vif pour la navbar */
+			padding: 10px 20px;
+		}
+
+		.navbar-brand {
+			color: white !important;
+			font-size: 1.5rem;
+			font-weight: bold;
+		}
+
+		.navbar-nav .nav-link {
+			color: white !important;
+			margin-left: 20px;
+		}
+
+		.navbar-nav .nav-link:hover {
+			color: #cce6ff !important; /* Bleu clair pour le survol */
+		}
+
+		.about-section {
+			padding: 60px 20px;
+			background-color: white;
+			margin: 20px;
+			border-radius: 10px;
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+		}
+
+		.about-section h2 {
+			color: #007bff; /* Bleu vif pour les titres */
+			margin-bottom: 20px;
+		}
+
+		.about-section p {
+			font-size: 1.1rem;
+			line-height: 1.8;
+			color: #333;
+		}
+
+		.about-section .btn {
+			margin-top: 20px;
+			background-color: #007bff;
+			border: none;
+			padding: 10px 30px;
+			font-size: 1.1rem;
+		}
+
+		.about-section .btn:hover {
+			background-color: #0056b3;
+		}
+
+		footer {
+			background-color: #007bff; /* Bleu vif pour le footer */
+			color: white;
+			text-align: center;
+			padding: 20px 0;
+			position: fixed;
+			width: 100%;
+			bottom: 0;
+		}
+	</style>
+</head>
+
+<body>
+	<!--Insertion de la Navbar -->
+	{% include 'preschool/html-template/partials/navbar.html' %}
+
+	<!-- Section À propos -->
+	<div class="about-section">
+		<div class="container">
+			<h2>À propos de School-Guinée</h2>
+			<p>
+				Fondée en 2024, <strong>School-Guinée</strong> est une institution éducative innovante dédiée à
+				l'épanouissement académique et personnel de chaque élève. Notre mission est de fournir une éducation de
+				qualité, accessible à tous, pour préparer les jeunes générations à relever les défis de demain.
+			</p>
+			<p>
+				Nous croyons en une approche holistique de l'éducation, qui combine excellence académique, développement
+				personnel et engagement communautaire. Nos programmes sont conçus pour inspirer la curiosité, stimuler
+				la créativité et encourager l'esprit critique.
+			</p>
+			<h3>Nos valeurs</h3>
+			<ul>
+				<li><strong>Excellence</strong> : Nous visons l'excellence dans tout ce que nous faisons.</li>
+				<li><strong>Intégrité</strong> : Nous agissons avec honnêteté et transparence.</li>
+				<li><strong>Innovation</strong> : Nous adoptons des méthodes pédagogiques modernes et innovantes.</li>
+				<li><strong>Communauté</strong> : Nous encourageons la collaboration et le respect mutuel.</li>
+			</ul>
+			<h3>Notre équipe</h3>
+			<p>
+				Notre équipe est composée d'enseignants passionnés, d'administrateurs dévoués et de professionnels de
+				l'éducation qui travaillent ensemble pour créer un environnement d'apprentissage stimulant et bienveillant.
+			</p>
+			<a href="{% url 'nous_contacter' %}" class="btn btn-primary">Nous contacter</a>
+		</div>
+	</div>
+
+	<!-- Pied de page -->
+	<footer>
+		<p class="mb-0">© 2024 School-Guinée. Tous droits réservés.</p>
+	</footer>
+
+	<script src="{% static 'assets/plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+</body>
+
+</html>

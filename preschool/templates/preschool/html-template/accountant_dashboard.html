@@ -1,0 +1,201 @@
+{% extends "preschool/html-template/adminBase.html" %}
+{% block titre %} PreSkool - Tableau de bord Comptable {% endblock %}
+{% block contenu %}
+   {% load static %}
+   <div class="main-wrapper">
+      {% include 'preschool/html-template/partials/header.html' %}
+      {% include 'preschool/html-template/partials/cpsidebar.html' %}
+
+      <div class="page-wrapper">
+         <div class="content container-fluid">
+            <div class="page-header">
+               <div class="row">
+                  <div class="col-sm-12">
+                     <h3 class="page-title">Bienvenue {{ user.username }}</h3>
+                     <ul class="breadcrumb">
+                        <li class="breadcrumb-item active">Tableau de bord {{ user.role }}</li>
+                     </ul>
+                  </div>
+               </div>
+            </div>
+            <div class="row">
+               <div class="col-xl-3 col-sm-6 col-12 d-flex">
+                  <div class="card bg-one w-100">
+                     <div class="card-body">
+                        <div class="db-widgets d-flex justify-content-between align-items-center">
+                           <div class="db-icon">
+                              <i class="fas fa-file-invoice-dollar"></i>
+                           </div>
+                           <div class="db-info">
+                              <h3>{{ total_frais }}</h3>
+                              <h6>Frais Collectés</h6>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-xl-3 col-sm-6 col-12 d-flex">
+                  <div class="card bg-two w-100">
+                     <div class="card-body">
+                        <div class="db-widgets d-flex justify-content-between align-items-center">
+                           <div class="db-icon">
+                              <i class="fas fa-money-bill-wave"></i>
+                           </div>
+                           <div class="db-info">
+                              <h3>{{ total_depenses }}</h3>
+                              <h6>Dépenses</h6>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-xl-3 col-sm-6 col-12 d-flex">
+                  <div class="card bg-three w-100">
+                     <div class="card-body">
+                        <div class="db-widgets d-flex justify-content-between align-items-center">
+                           <div class="db-icon">
+                              <i class="fas fa-coins"></i>
+                           </div>
+                           <div class="db-info">
+                              <h3>{{ total_salaires }}</h3>
+                              <h6>Salaires</h6>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-xl-3 col-sm-6 col-12 d-flex">
+                  <div class="card bg-four w-100">
+                     <div class="card-body">
+                        <div class="db-widgets d-flex justify-content-between align-items-center">
+                           <div class="db-icon">
+                              <i class="fas fa-chart-line"></i>
+                           </div>
+                           <div class="db-info">
+                              <h3>{{ solde_compte }}</h3>
+                              <h6>Solde du Compte</h6>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="row">
+               <div class="col-md-6 d-flex">
+                  <div class="card flex-fill">
+                     <div class="card-header">
+                        <h5 class="card-title">Dernières Transactions</h5>
+                     </div>
+                     <div class="card-body">
+                        <div class="table-responsive">
+                           <table class="table table-hover table-center">
+                              <thead class="thead-light">
+                                 <tr>
+                                    <th>Date</th>
+                                    <th>Type</th>
+                                    <th>Montant</th>
+                                    <th>Description</th>
+                                 </tr>
+                              </thead>
+                              <tbody>
+                                 {% for transaction in dernieres_transactions %}
+                                 <tr>
+                                    <td>{{ transaction.date }}</td>
+                                    <td>{{ transaction.type }}</td>
+                                    <td>{{ transaction.montant }}</td>
+                                    <td>{{ transaction.description }}</td>
+                                 </tr>
+                                 {% endfor %}
+                              </tbody>
+                           </table>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-md-6 d-flex">
+                  <div class="card flex-fill">
+                     <div class="card-header">
+                        <h5 class="card-title">Frais en Attente</h5>
+                     </div>
+                     <div class="card-body">
+                        <div class="table-responsive">
+                           <table class="table table-hover table-center">
+                              <thead class="thead-light">
+                                 <tr>
+                                    <th>Élève</th>
+                                    <th>Montant</th>
+                                    <th>Date d'Échéance</th>
+                                 </tr>
+                              </thead>
+                              <tbody>
+                                 {% for frais in frais_en_attente %}
+                                 <tr>
+                                    <td>{{ frais.eleve }}</td>
+                                    <td>{{ frais.montant }}</td>
+                                    <td>{{ frais.date_echeance }}</td>
+                                 </tr>
+                                 {% endfor %}
+                              </tbody>
+                           </table>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="row">
+               <div class="col-md-12">
+                  <div class="card flex-fill">
+                     <div class="card-header">
+                        <h5 class="card-title">Rapport Financier</h5>
+                     </div>
+                     <div class="card-body">
+                        <div class="table-responsive">
+                           <table class="table table-hover table-center">
+                              <thead class="thead-light">
+                                 <tr>
+                                    <th>Type</th>
+                                    <th>Montant</th>
+                                    <th>Période</th>
+                                 </tr>
+                              </thead>
+                              <tbody>
+                                 <tr>
+                                    <td>Frais Collectés</td>
+                                    <td>{{ total_frais }}</td>
+                                    <td>Mois en cours</td>
+                                 </tr>
+                                 <tr>
+                                    <td>Dépenses</td>
+                                    <td>{{ total_depenses }}</td>
+                                    <td>Mois en cours</td>
+                                 </tr>
+                                 <tr>
+                                    <td>Salaires</td>
+                                    <td>{{ total_salaires }}</td>
+                                    <td>Mois en cours</td>
+                                 </tr>
+                                 <tr>
+                                    <td>Solde du Compte</td>
+                                    <td>{{ solde_compte }}</td>
+                                    <td>Mois en cours</td>
+                                 </tr>
+                              </tbody>
+                           </table>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <footer>
+            <p>Copyright © 2023 PreSkool.</p>
+         </footer>
+      </div>
+   </div>
+
+   <script src="{% static 'assets/js/jquery-3.6.0.min.js' %}"></script>
+   <script src="{% static 'assets/js/popper.min.js' %}"></script>
+   <script src="{% static 'assets/plugins/bootstrap/js/bootstrap.min.js' %}"></script>
+   <script src="{% static 'assets/plugins/slimscroll/jquery.slimscroll.min.js' %}"></script>
+   <script src="{% static 'assets/js/script.js' %}"></script>
+{% endblock %}

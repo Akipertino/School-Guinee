@@ -3,6 +3,7 @@
 
 {% extends "preschool/html-template/adminBase.html" %}
 
+
 {% block titre %}PreSkool - Tableau de bord {%  endblock %}
 {% load static %}
 
@@ -10,12 +11,14 @@
 {% block contenu %}
 
 <div class="page-wrapper">
+    {% include 'preschool/html-template/partials/header.html' %}
+    {% include 'preschool/html-template/partials/tcsidebar.html'%}
 	<div class="content container-fluid">
 
 		<div class="page-header">
 			<div class="row">
 				<div class="col-sm-12">
-					<h3 class="page-title">Bienvenue Jonathan!</h3>
+					<h3 class="page-title">Bienvenue {{user.username}}</h3>
 					<ul class="breadcrumb">
 						<li class="breadcrumb-item"><a href="index.html">Tableau de bord</a></li>
 						<li class="breadcrumb-item active">Tableau de bord Enseignant</li>

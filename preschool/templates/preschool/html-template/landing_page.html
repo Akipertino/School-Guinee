@@ -1,18 +1,197 @@
 <!DOCTYPE html>
-<html lang="en">
-	<head>
-		{% load static %}
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=é, initial-scale=1.0">
-		<title>Accueil- School-Guinée</title>
-		<link rel="stylesheet" href="{% static 'assets/plugins/bootstrap/css/bootstrap.min.css' %}">
-	</head>
-	<body>
-		{% include 'preschool/html-template/partials/navbar.html' %}
-		<div class="container text-center text-primary mt-5">
-			<h1>Bienvenue sur le site officiel de School-Guinée</h1>
-			<p>L'éducation au centre de nos préoccupations pour un meilleur avenir de nos enfants en Guinée.</p>
-		</div>
+<html lang="fr">
 
-	</body>
+<head>
+	{% load static %}
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Accueil - School-Guinée</title>
+	<link rel="stylesheet" href="{% static 'assets/plugins/bootstrap/css/bootstrap.min.css' %}">
+	<style>
+		body {
+			font-family: 'Arial', sans-serif;
+			background-color: #e6f0ff; /* Bleu clair pour le fond */
+			margin: 0;
+			padding: 0;
+		}
+
+		.hero-section {
+			background: linear-gradient(rgba(0, 123, 255, 0.7), rgba(0, 123, 255, 0.7)), url("{% static 'assets/img/school.jpg' %}");
+			background-size: cover;
+			background-position: center;
+			height: 100vh;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			color: white;
+			text-align: center;
+		}
+
+		.hero-section h1 {
+			font-size: 4rem;
+			font-weight: bold;
+			text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+			animation: fadeIn 2s ease-in-out;
+		}
+
+		.hero-section p {
+			font-size: 1.5rem;
+			margin-top: 20px;
+			text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+			animation: fadeIn 3s ease-in-out;
+		}
+
+		.hero-section .btn {
+			margin-top: 30px;
+			font-size: 1.2rem;
+			padding: 10px 30px;
+			border-radius: 25px;
+			background-color: #0056b3; /* Bleu foncé pour le bouton */
+			border: none;
+			animation: fadeIn 4s ease-in-out;
+		}
+
+		.hero-section .btn:hover {
+			background-color: #004080; /* Bleu plus foncé au survol */
+		}
+
+		.features-section {
+			padding: 60px 20px;
+			background-color: white;
+		}
+
+		.features-section h2 {
+			color: #007bff; /* Bleu vif pour les titres */
+			margin-bottom: 40px;
+			text-align: center;
+			font-size: 2.5rem;
+			animation: slideIn 1s ease-in-out;
+		}
+
+		.features-section .card {
+			border: none;
+			border-radius: 10px;
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+			transition: transform 0.3s ease, box-shadow 0.3s ease;
+			overflow: hidden;
+		}
+
+		.features-section .card:hover {
+			transform: translateY(-10px);
+			box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+		}
+
+		.features-section .card img {
+			width: 100%;
+			height: 200px;
+			object-fit: cover;
+			transition: transform 0.3s ease;
+		}
+
+		.features-section .card:hover img {
+			transform: scale(1.1);
+		}
+
+		.features-section .card-body {
+			text-align: center;
+			padding: 20px;
+		}
+
+		.features-section .card-title {
+			font-size: 1.5rem;
+			color: #007bff;
+			margin-bottom: 15px;
+		}
+
+		.features-section .card-text {
+			font-size: 1rem;
+			color: #555;
+		}
+
+		footer {
+			background-color: #007bff; /* Bleu vif pour le footer */
+			color: white;
+			text-align: center;
+			padding: 20px 0;
+		}
+
+		/* Animations */
+		@keyframes fadeIn {
+			from {
+				opacity: 0;
+			}
+			to {
+				opacity: 1;
+			}
+		}
+
+		@keyframes slideIn {
+			from {
+				transform: translateY(-50px);
+				opacity: 0;
+			}
+			to {
+				transform: translateY(0);
+				opacity: 1;
+			}
+		}
+	</style>
+</head>
+
+<body>
+	{% include 'preschool/html-template/partials/navbar.html' %}
+
+	<!-- Section Hero -->
+	<div class="hero-section">
+		<div>
+			<h1>Bienvenue à School-Guinée</h1>
+			<p>L'éducation est la clé d'un avenir meilleur.</p>
+			<a href="{% url 'connexion' %}" class="btn btn-primary btn-lg">Se connecter</a>
+		</div>
+	</div>
+
+	<!-- Section Fonctionnalités -->
+	<section class="features-section">
+		<div class="container">
+			<h2>Nos Services</h2>
+			<div class="row">
+				<div class="col-md-4 mb-4">
+					<div class="card">
+						<img src="{% static 'assets/img/eleves.jpg' %}" alt="Élèves">
+						<div class="card-body">
+							<h5 class="card-title">Gestion des Élèves</h5>
+							<p class="card-text">Suivez et gérez les informations des élèves de manière efficace.</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4 mb-4">
+					<div class="card">
+						<img src="{% static 'assets/img/enseignants.jpg' %}" alt="Enseignants">
+						<div class="card-body">
+							<h5 class="card-title">Gestion des Enseignants</h5>
+							<p class="card-text">Organisez et supervisez le travail des enseignants.</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4 mb-4">
+					<div class="card">
+						<img src="{% static 'assets/img/cours.jpg' %}" alt="Cours">
+						<div class="card-body">
+							<h5 class="card-title">Gestion des Cours</h5>
+							<p class="card-text">Planifiez et attribuez les cours aux classes et enseignants.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Pied de page -->
+	<footer>
+		<p class="mb-0">© 2024 School-Guinée. Tous droits réservés.</p>
+	</footer>
+
+	<script src="{% static 'assets/plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+</body>
+
 </html>

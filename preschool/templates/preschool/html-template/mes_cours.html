@@ -1,0 +1,60 @@
+{% extends 'preschool/html-template/adminBase.html' %}
+{% load static %}
+{% block titre %} PreSkool - Mes Cours {% endblock %}
+
+{% block contenu %}
+
+<div class="page-wrapper">
+    {% include 'preschool/html-template/partials/header.html' %}
+    {% include 'preschool/html-template/partials/stsidebar.html' %}
+    <div class="content container-fluid">
+        <div class="page-header">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h3 class="page-title">Mes Cours</h3>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item active"> Liste de tous mes cours</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Liste des cours -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        {% if cours %}
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Nom du cours</th>  <!-- Nom du cours en premier -->
+                                        <th>Enseignant</th>   <!-- Enseignant en deuxième -->
+                                        <th>Matière</th>
+                                        <th>Date et heure</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for cour in cours %}
+                                        <tr>
+                                            <td>{{ cour.nom|default:"Cours sans nom" }}</td>  <!-- Nom du cours -->
+                                            <td>{{ cour.enseignant.nom }}</td>  <!-- Enseignant -->
+                                            <td>{{ cour.matiere.nom }}</td>  <!-- Matière -->
+                                            <td>{{ cour.date_debut|date:"d M Y H:i" }} - {{ cour.date_fin|time:"H:i" }}</td>  <!-- Date et heure -->
+                                            <td>{{ cour.description|default:"Aucune description" }}</td>  <!-- Description -->
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        {% else %}
+                            <p>Aucun cours trouvé.</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
